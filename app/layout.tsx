@@ -13,7 +13,8 @@ const headingFont = Roboto_Condensed({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      'https://drova-u-dida-ivana.adept-trout-3642.chatgpt.site',
   ),
   title: 'Дрова у Діда Івана — чесна ціна з доставкою',
   description:
