@@ -57,6 +57,8 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
+    font-size: 18px;
+    line-height: 1.5;
   }
   button,
   a {
@@ -102,6 +104,33 @@
   width: 1.1rem;
   height: 1.1rem;
   color: #183a28;
+}
+
+.product-photo {
+  background-image:
+    linear-gradient(180deg, rgba(10, 28, 18, 0) 58%, rgba(10, 28, 18, 0.16)),
+    url('/products-triptych-v2.png');
+  background-repeat: no-repeat;
+  background-size: 300% 100%;
+}
+
+.step-label {
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #596158;
+}
+
+::selection {
+  background: #f0b83d;
+  color: #183a28;
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 17px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
