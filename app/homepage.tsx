@@ -7,6 +7,7 @@ import {
   Check,
   Clock3,
   Flame,
+  Menu,
   PackageCheck,
   Phone,
   ShieldCheck,
@@ -14,9 +15,9 @@ import {
   Truck,
   Users,
   Warehouse,
+  X,
 } from 'lucide-react';
 
-import { PhoneButton } from '@/app/firewood-ui';
 import {
   PHONE,
   PHONE_LABEL,
@@ -197,6 +198,7 @@ function SavingsCalculator({
 export default function Homepage() {
   const [woodId, setWoodId] = useState<WoodId>('birch');
   const [quantity, setQuantity] = useState(10);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const chooseWood = (id: WoodId) => {
     setWoodId(id);
@@ -285,74 +287,44 @@ export default function Homepage() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f6efdf] pb-[76px] text-primary sm:pb-0">
-      <div className="border-b border-white/10 bg-[#183a28] px-4 py-2 text-white">
-        <div className="mx-auto flex max-w-[1180px] flex-wrap justify-center gap-x-8 gap-y-1 text-sm font-bold sm:text-base">
-          <span>
-            <Truck className="mr-2 inline size-4 text-[#f0b83d]" />
-            Доставка по Києву та області
-          </span>
-          <span className="hidden sm:inline">
-            <Banknote className="mr-2 inline size-4 text-[#f0b83d]" />
-            Оплата при отриманні
-          </span>
-          <span className="hidden md:inline">
-            <ShieldCheck className="mr-2 inline size-4 text-[#f0b83d]" />
-            Чесні ціни — без сюрпризів
-          </span>
-        </div>
-      </div>
-
       <header className="border-b border-[#d8c8aa] bg-[#fffaf0]">
-        <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <a href="#advice" className="flex min-w-0 items-center gap-3">
+        <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_auto] items-center px-4 sm:px-6 lg:grid-cols-[300px_1fr_260px]">
+          <a
+            href="#advice"
+            className="flex min-w-0 items-center gap-3 py-3 lg:row-span-2 lg:border-r lg:border-[#e2d7c3] lg:pr-6"
+          >
             <img
               src="/logo.png"
               alt="Дрова у Діда Івана"
-              className="size-16 shrink-0 object-contain sm:size-24"
+              className="size-16 shrink-0 object-contain lg:size-32"
             />
             <div>
-              <p className="font-heading text-xl font-black leading-none sm:text-3xl">
+              <p className="font-heading text-xl font-black leading-none lg:text-3xl">
                 Дрова
                 <span className="block">у Діда Івана</span>
               </p>
-              <p className="mt-1 hidden text-sm font-semibold text-[#625f56] sm:block">
+              <p className="mt-2 hidden text-sm font-semibold text-[#625f56] lg:block">
                 Натуральні дрова з доставкою
               </p>
             </div>
           </a>
 
-          <div className="hidden flex-1 lg:block">
-            <div className="flex items-center justify-end gap-8 border-b border-[#e2d7c3] pb-3 text-sm font-bold text-[#615d54]">
-              <span>
-                <Truck className="mr-2 inline size-4" /> Доставка включена
-              </span>
-              <span>
-                <Banknote className="mr-2 inline size-4" /> Оплата при отриманні
-              </span>
-            </div>
-            <nav
-              aria-label="Головна навігація"
-              className="flex items-center justify-end gap-7 pt-3 text-base font-black"
-            >
-              <a href="#products" className="hover:text-[#b17300]">
-                Береза
-              </a>
-              <a href="#products" className="hover:text-[#b17300]">
-                Вільха
-              </a>
-              <a href="#products" className="hover:text-[#b17300]">
-                Сосна
-              </a>
-              <a href="#calculator" className="hover:text-[#b17300]">
-                Розрахунок
-              </a>
-              <a href="#contacts" className="hover:text-[#b17300]">
-                Контакти
-              </a>
-            </nav>
+          <div className="hidden min-h-16 items-center justify-center gap-7 border-b border-[#e2d7c3] px-6 text-sm font-bold text-[#615d54] lg:flex">
+            <span>
+              <Truck className="mr-2 inline size-4 text-[#9b6a18]" /> Доставка
+              включена
+            </span>
+            <span>
+              <Banknote className="mr-2 inline size-4 text-[#9b6a18]" /> Оплата
+              при отриманні
+            </span>
+            <span>
+              <ShieldCheck className="mr-2 inline size-4 text-[#9b6a18]" />
+              Чесні ціни
+            </span>
           </div>
 
-          <div className="hidden text-right xl:block">
+          <div className="hidden min-h-16 border-b border-l border-[#e2d7c3] px-5 text-right lg:flex lg:flex-col lg:justify-center">
             <a
               href={`tel:${PHONE}`}
               className="font-heading text-2xl font-black"
@@ -364,7 +336,75 @@ export default function Homepage() {
               Пн–Нд: 08:00–20:00
             </p>
           </div>
+
+          <nav
+            aria-label="Головна навігація"
+            className="col-start-2 col-end-4 row-start-2 hidden min-h-16 items-center justify-between gap-5 px-7 text-base font-black lg:flex"
+          >
+            <a href="#products" className="hover:text-[#b17300]">
+              Береза
+            </a>
+            <a href="#products" className="hover:text-[#b17300]">
+              Вільха
+            </a>
+            <a href="#products" className="hover:text-[#b17300]">
+              Сосна
+            </a>
+            <a href="#benefits" className="hover:text-[#b17300]">
+              Про нас
+            </a>
+            <a href="#benefits" className="hover:text-[#b17300]">
+              Доставка
+            </a>
+            <a href="#benefits" className="hover:text-[#b17300]">
+              Оплата
+            </a>
+            <a href="#contacts" className="hover:text-[#b17300]">
+              Контакти
+            </a>
+          </nav>
+
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={mobileMenuOpen ? 'Закрити меню' : 'Відкрити меню'}
+            className="flex size-12 items-center justify-center rounded-lg border border-[#d8c8aa] lg:hidden"
+          >
+            {mobileMenuOpen ? (
+              <X className="size-7" />
+            ) : (
+              <Menu className="size-7" />
+            )}
+          </button>
         </div>
+
+        {mobileMenuOpen && (
+          <nav
+            id="mobile-menu"
+            aria-label="Мобільна навігація"
+            className="grid grid-cols-2 gap-px border-t border-[#d8c8aa] bg-[#d8c8aa] lg:hidden"
+          >
+            {[
+              ['Береза', '#products'],
+              ['Вільха', '#products'],
+              ['Сосна', '#products'],
+              ['Розрахунок', '#calculator'],
+              ['Про нас', '#benefits'],
+              ['Контакти', '#contacts'],
+            ].map(([label, href]) => (
+              <a
+                key={label}
+                href={href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex min-h-14 items-center justify-center bg-[#fffaf0] px-4 text-base font-black"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        )}
       </header>
 
       <section id="advice" className="bg-[#10291c] text-white">
@@ -396,17 +436,17 @@ export default function Homepage() {
 
       <section className="relative isolate overflow-hidden border-b border-[#d8c8aa]">
         <img
-          src="/hero-firewood-v2.png"
-          alt="Складені колоті дрова"
-          className="absolute inset-0 -z-20 size-full object-cover object-center"
+          src="/hero-grandfather-v3.png"
+          alt="Дід Іван тримає колоті березові дрова біля дровітні"
+          className="absolute inset-0 -z-20 size-full object-cover object-[62%_center] md:object-center"
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#fffaf0_0%,rgba(255,250,240,.97)_45%,rgba(255,250,240,.28)_76%,rgba(16,41,28,.08)_100%)] max-md:bg-[linear-gradient(180deg,rgba(255,250,240,.98)_0%,rgba(255,250,240,.9)_72%,rgba(255,250,240,.45)_100%)]" />
-        <div className="mx-auto grid min-h-[500px] max-w-[1280px] items-center px-4 py-10 sm:px-6 lg:grid-cols-[1.08fr_.92fr] lg:py-14">
-          <div className="max-w-3xl">
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(255,250,240,.98)_0%,rgba(255,250,240,.92)_47%,rgba(255,250,240,.08)_72%,transparent_100%)] md:bg-[linear-gradient(90deg,rgba(255,250,240,.7)_0%,rgba(255,250,240,.22)_45%,transparent_65%)]" />
+        <div className="mx-auto flex min-h-[520px] max-w-[1280px] items-center px-4 py-10 sm:px-6 lg:min-h-[590px] lg:py-14">
+          <div className="max-w-[690px]">
             <p className="inline-flex rounded-full border border-[#d8c8aa] bg-[#fffaf0]/90 px-4 py-2 text-sm font-black uppercase tracking-wide">
               Береза · Вільха · Сосна
             </p>
-            <h1 className="mt-5 font-heading text-[clamp(3.2rem,6.4vw,6.7rem)] font-black uppercase leading-[.88] tracking-[-.04em]">
+            <h1 className="mt-5 font-heading text-[clamp(2.9rem,5.1vw,5rem)] font-black uppercase leading-[.88] tracking-[-.04em]">
               Більше дров —
               <span className="block text-[#d08a00]">більша економія</span>
               <span className="block text-[#9b3724]">в гривнях!</span>
@@ -416,22 +456,6 @@ export default function Homepage() {
               <strong className="text-[#9b3724]">до 6 000 грн</strong> на одному
               замовленні.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <PhoneButton className="min-h-16 text-xl" />
-              <a
-                href="#calculator"
-                className="flex min-h-16 items-center justify-center rounded-xl border-2 border-primary bg-[#fffaf0] px-6 text-xl font-black"
-              >
-                Розрахувати вигоду
-              </a>
-            </div>
-          </div>
-          <div className="pointer-events-none relative hidden min-h-[430px] lg:block">
-            <img
-              src="/logo.png"
-              alt=""
-              className="absolute bottom-[-55px] right-0 w-[430px] drop-shadow-[0_24px_30px_rgba(32,21,12,.25)]"
-            />
           </div>
         </div>
       </section>
@@ -443,7 +467,7 @@ export default function Homepage() {
         onQuantityChange={setQuantity}
       />
 
-      <section className="paper-texture px-4 pb-12 sm:px-6">
+      <section id="benefits" className="paper-texture px-4 pb-12 sm:px-6">
         <div className="mx-auto grid max-w-[1180px] gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map(({ icon: Icon, title, text }) => (
             <div
