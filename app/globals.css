@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.35);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --background: #f6efdf;
+  --foreground: #213426;
+  --card: #fffaf0;
+  --card-foreground: #213426;
+  --primary: #183a28;
+  --primary-foreground: #fffaf0;
+  --secondary: #eadfc9;
+  --secondary-foreground: #213426;
+  --muted: #eadfc9;
+  --muted-foreground: #5f665f;
+  --accent: #f3b61d;
+  --accent-foreground: #213426;
+  --border: #d7c8ad;
+  --input: #d7c8ad;
+  --ring: #d69000;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.paper-texture {
+  background-color: #f6efdf;
+  background-image:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(255, 255, 255, 0.72),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 70%,
+      rgba(213, 184, 132, 0.17),
+      transparent 32%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(65, 46, 22, 0.018) 0,
+      rgba(65, 46, 22, 0.018) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+.trust-pill {
+  display: inline-flex;
+  min-height: 2.4rem;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #cdbd9f;
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.92);
+  padding: 0.45rem 0.8rem;
+  font-weight: 800;
+}
+
+.trust-pill svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: #183a28;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
