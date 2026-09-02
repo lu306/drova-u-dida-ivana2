@@ -352,21 +352,17 @@ export default function Homepage() {
             </nav>
           </div>
 
-          <div className="text-right">
+          <div className="hidden text-right xl:block">
             <a
               href={`tel:${PHONE}`}
-              className="hidden font-heading text-2xl font-black xl:block"
+              className="font-heading text-2xl font-black"
             >
               <Phone className="mr-2 inline size-6 text-[#d99600]" />
               {PHONE_LABEL}
             </a>
-            <p className="hidden text-sm font-bold text-[#625f56] xl:block">
+            <p className="text-sm font-bold text-[#625f56]">
               Пн–Нд: 08:00–20:00
             </p>
-            <PhoneButton
-              label="Подзвонити"
-              className="min-h-12 px-4 text-base xl:hidden"
-            />
           </div>
         </div>
       </header>
@@ -563,16 +559,10 @@ export default function Homepage() {
         </div>
       </section>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 gap-2 border-t border-[#0f281a] bg-[#183a28] p-2 sm:hidden">
-        <a
-          href={`tel:${PHONE}`}
-          className="flex min-h-14 items-center justify-center gap-2 rounded-lg border border-[#fffaf0]/50 bg-[#183a28] px-3 text-base font-black text-white"
-        >
-          <Phone className="size-5" /> Подзвонити
-        </a>
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#0f281a] bg-[#183a28] p-2 sm:hidden">
         <a
           href="#calculator"
-          className="flex min-h-14 items-center justify-center gap-2 rounded-lg bg-[#f0b83d] px-3 text-base font-black text-primary"
+          className="flex min-h-14 w-full items-center justify-center gap-2 rounded-lg bg-[#f0b83d] px-3 text-base font-black text-primary"
         >
           <Sparkles className="size-5" /> Розрахувати
         </a>
