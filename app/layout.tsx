@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Roboto_Condensed, Source_Sans_3 } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const bodyFont = Source_Sans_3({
@@ -39,6 +40,18 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="uk">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18426173367"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-tag" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-18426173367');`}
+        </Script>
+      </head>
       <body className={`${bodyFont.variable} ${headingFont.variable}`}>
         {children}
       </body>
