@@ -10,7 +10,6 @@ import {
   PackageCheck,
   Phone,
   ShieldCheck,
-  Sparkles,
   Truck,
   Users,
   Warehouse,
@@ -640,12 +639,13 @@ export default function Homepage() {
         </div>
       </section>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#0f281a] bg-[#183a28] p-2 sm:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 bg-gradient-to-t from-[#10291c] via-[#10291c]/95 to-transparent px-4 pb-[max(.75rem,env(safe-area-inset-bottom))] pt-4 sm:hidden">
         <a
-          href="#calculator"
-          className="flex min-h-14 w-full items-center justify-center gap-2 rounded-lg bg-[#f0b83d] px-3 text-base font-black text-primary"
+          href={`tel:${PHONE}`}
+          aria-label={`Подзвонити: ${PHONE_LABEL}`}
+          className="mx-auto flex min-h-16 w-full max-w-md items-center justify-center gap-3 rounded-full border-2 border-[#f7cf72] bg-[#f0b83d] px-5 font-heading text-[1.45rem] font-black tracking-wide text-primary shadow-[0_8px_24px_rgba(7,24,14,.4)] active:scale-[.98]"
         >
-          <Sparkles className="size-5" /> Розрахувати
+          <Phone className="size-6 shrink-0" /> {PHONE_LABEL}
         </a>
       </div>
     </main>
