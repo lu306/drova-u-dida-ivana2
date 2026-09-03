@@ -6,7 +6,6 @@ import {
   Banknote,
   Check,
   Clock3,
-  Flame,
   Menu,
   PackageCheck,
   Phone,
@@ -33,13 +32,8 @@ const quantities = [5, 10, 15, 20];
 
 const benefits = [
   {
-    icon: Flame,
-    title: 'Сухі дрова',
-    text: 'Вологість 15–20%',
-  },
-  {
     icon: PackageCheck,
-    title: 'Чистий об’єм',
+    title: 'Чесний об’єм',
     text: 'Без обману та порожнин',
   },
   {
@@ -57,7 +51,7 @@ const benefits = [
 const trustItems = [
   {
     icon: ShieldCheck,
-    title: 'Працюємо з 1985 року',
+    title: 'Більше 10 років на ринку',
   },
   {
     icon: Users,
@@ -88,46 +82,43 @@ function SavingsCalculator({
   const ordinaryTotal = wood.ordinaryPrice * quantity;
   const total = getUnitPrice(wood, quantity) * quantity;
   const saving = ordinaryTotal - total;
-  const savingPercent = Math.round((saving / ordinaryTotal) * 10000) / 100;
 
   return (
     <section
       id="calculator"
-      className="relative z-10 mx-auto -mt-1 max-w-[1280px] px-3 pb-8 sm:px-6"
+      className="relative z-30 mx-auto -mt-[70px] max-w-[1280px] px-3 pb-8 sm:-mt-[90px] sm:px-6 lg:-mt-[115px]"
     >
-      <div className="overflow-hidden rounded-[1.7rem] border-4 border-[#254b31] bg-[#183a28] p-4 text-white shadow-[0_18px_45px_rgba(21,42,28,.2)] sm:p-7">
+      <div className="overflow-hidden rounded-[1.35rem] border-4 border-[#3c5b3d] bg-[#29462f] p-3 text-white shadow-[0_18px_45px_rgba(45,65,43,.2)] sm:rounded-[1.7rem] sm:p-7">
         <div className="text-center">
-          <p className="font-heading text-2xl font-black uppercase sm:text-3xl">
+          <p className="whitespace-nowrap font-heading text-[1.12rem] font-black uppercase sm:text-3xl">
             Розрахуйте свою економію
           </p>
-          <p className="mt-1 text-base font-semibold text-white/75 sm:text-lg">
+          <p className="mt-1 text-sm font-semibold text-white/75 sm:text-lg">
             Чим більше замовлення — тим менша ціна за складометр
           </p>
+          <div className="mx-auto mt-3 grid max-w-[560px] grid-cols-3 gap-2 sm:mt-4 sm:gap-3">
+            {WOODS.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => onWoodChange(item.id)}
+                aria-pressed={woodId === item.id}
+                className={cn(
+                  'min-h-11 rounded-lg border-2 px-2 text-sm font-black transition sm:min-h-12 sm:text-base',
+                  woodId === item.id
+                    ? 'border-[#e2a72c] bg-[#f0b83d] text-[#193726] shadow-[inset_0_0_0_1px_rgba(255,255,255,.25)]'
+                    : 'border-[#d9cfb9] bg-[#fffaf0] text-primary hover:border-[#e2a72c]',
+                )}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-6 grid gap-4 lg:grid-cols-[.8fr_1.2fr]">
+        <div className="mt-4 grid gap-3 sm:mt-6 sm:gap-4 lg:grid-cols-[.8fr_1.2fr]">
           <div className="rounded-2xl bg-[#fffaf0] p-4 text-primary sm:p-5">
-            <p className="text-base font-black">Оберіть породу</p>
-            <div className="mt-3 grid grid-cols-3 gap-2">
-              {WOODS.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => onWoodChange(item.id)}
-                  aria-pressed={woodId === item.id}
-                  className={cn(
-                    'min-h-12 rounded-lg border-2 px-2 text-base font-black transition',
-                    woodId === item.id
-                      ? 'border-[#d99600] bg-[#f0b83d]'
-                      : 'border-[#d8c8aa] bg-white hover:border-[#d99600]',
-                  )}
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
-
-            <p className="mt-5 text-base font-black">Оберіть об’єм</p>
+            <p className="text-base font-black">Оберіть об’єм</p>
             <div className="mt-3 grid grid-cols-4 gap-2">
               {quantities.map((value) => (
                 <button
@@ -136,24 +127,24 @@ function SavingsCalculator({
                   onClick={() => onQuantityChange(value)}
                   aria-pressed={quantity === value}
                   className={cn(
-                    'min-h-14 rounded-lg border-2 px-2 text-lg font-black transition',
+                    'min-h-11 whitespace-nowrap rounded-lg border-2 px-1 text-[.78rem] font-black transition sm:min-h-14 sm:px-2 sm:text-lg',
                     quantity === value
                       ? 'border-[#d99600] bg-[#f0b83d]'
                       : 'border-[#d8c8aa] bg-white hover:border-[#d99600]',
                   )}
                 >
-                  {value} м³
+                  {value} скл. м
                 </button>
               ))}
             </div>
-            <p className="mt-3 text-center text-sm font-bold text-[#6a675f]">
-              1 складометр ≈ 1,7 м³
-            </p>
           </div>
 
-          <div className="grid overflow-hidden rounded-2xl bg-[#fffaf0] text-primary sm:grid-cols-[1.15fr_.85fr]">
-            <div className="grid grid-cols-2 items-center gap-3 p-5 sm:p-7">
-              <div className="border-r border-[#d8c8aa] pr-3">
+          <div className="overflow-hidden rounded-2xl bg-[#fffaf0] text-primary">
+            <p className="border-b border-[#d8c8aa] px-5 py-3 text-center text-base font-bold text-[#5f635d]">
+              {quantity} скл. м · {wood.name} · доставка включена
+            </p>
+            <div className="grid sm:grid-cols-[.8fr_1fr_1.15fr]">
+              <div className="flex flex-col justify-center border-b border-[#d8c8aa] p-5 text-center sm:border-b-0 sm:border-r sm:p-7">
                 <p className="text-base font-bold text-[#6b665b]">Було</p>
                 <p className="mt-1 font-heading text-3xl font-black">
                   <s className="decoration-[#b84a2f] decoration-4">
@@ -162,31 +153,26 @@ function SavingsCalculator({
                   <span className="text-lg">грн</span>
                 </p>
               </div>
-              <div className="pl-2">
-                <p className="text-base font-bold text-[#6b665b]">Зараз</p>
-                <p className="mt-1 font-heading text-3xl font-black">
-                  {formatPrice(total)} <span className="text-lg">грн</span>
+
+              <div className="flex flex-col items-center justify-center bg-[#f0b83d] p-5 text-center sm:p-7">
+                <p className="text-base font-black">Ваша економія</p>
+                <p className="mt-1 font-heading text-4xl font-black">
+                  {formatPrice(saving)} грн
                 </p>
               </div>
-              <p className="col-span-2 text-base font-bold text-[#5f635d]">
-                {quantity} м³ · {wood.name} · доставка включена
-              </p>
-            </div>
 
-            <div className="flex flex-col items-center justify-center bg-[#f0b83d] p-5 text-center text-primary sm:p-7">
-              <p className="text-base font-black">Ваша економія</p>
-              <p className="mt-1 font-heading text-4xl font-black sm:text-5xl">
-                {formatPrice(saving)} грн
-              </p>
-              <p className="mt-1 text-base font-black">
-                Економія {savingPercent}%
-              </p>
-              <a
-                href={`tel:${PHONE}`}
-                className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 text-base font-black text-white"
-              >
-                <Phone className="size-5" /> Подзвонити
-              </a>
+              <div className="flex flex-col items-center justify-center p-5 text-center sm:p-7">
+                <p className="text-base font-bold text-[#6b665b]">Стало</p>
+                <p className="mt-1 font-heading text-4xl font-black">
+                  {formatPrice(total)} <span className="text-lg">грн</span>
+                </p>
+                <a
+                  href={`tel:${PHONE}`}
+                  className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 text-base font-black text-white"
+                >
+                  <Phone className="size-5" /> Подзвонити
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -255,7 +241,9 @@ export default function Homepage() {
             };
             const nextWood = WOODS.find((item) => item.id === wood);
             if (!nextWood || !quantities.includes(Number(nextQuantity))) {
-              throw new Error('Оберіть породу та обсяг 5, 10, 15 або 20 м³');
+              throw new Error(
+                'Оберіть породу та обсяг 5, 10, 15 або 20 складометрів',
+              );
             }
             const count = Number(nextQuantity);
             const unitPrice = getUnitPrice(nextWood, count);
@@ -287,29 +275,30 @@ export default function Homepage() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f6efdf] pb-[76px] text-primary sm:pb-0">
-      <header className="border-b border-[#d8c8aa] bg-[#fffaf0]">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_auto] items-center px-4 sm:px-6 lg:grid-cols-[300px_1fr_260px]">
+      <header className="relative z-10 border-b border-[#d8c8aa] bg-[#fffaf0]">
+        <div className="mx-auto hidden max-w-[1280px] grid-cols-[185px_255px_1fr_250px] grid-rows-[96px_60px] px-6 pt-2 lg:grid">
           <a
-            href="#advice"
-            className="flex min-w-0 items-center gap-3 py-3 lg:row-span-2 lg:border-r lg:border-[#e2d7c3] lg:pr-6"
+            href="#top"
+            className="row-span-2 flex items-center justify-center pr-4"
           >
             <img
               src="/logo.png"
               alt="Дрова у Діда Івана"
-              className="size-16 shrink-0 object-contain lg:size-32"
+              className="size-[154px] object-contain"
             />
-            <div>
-              <p className="font-heading text-xl font-black leading-none lg:text-3xl">
-                Дрова
-                <span className="block">у Діда Івана</span>
-              </p>
-              <p className="mt-2 hidden text-sm font-semibold text-[#625f56] lg:block">
-                Натуральні дрова з доставкою
-              </p>
-            </div>
           </a>
 
-          <div className="hidden min-h-16 items-center justify-center gap-7 border-b border-[#e2d7c3] px-6 text-sm font-bold text-[#615d54] lg:flex">
+          <div className="flex flex-col justify-center px-5">
+            <p className="font-heading text-3xl font-black leading-none">
+              Дрова
+              <span className="block">у Діда Івана</span>
+            </p>
+            <p className="mt-2 whitespace-nowrap text-sm font-semibold text-[#625f56]">
+              Натуральні дрова з доставкою
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center gap-6 px-5 text-sm font-bold text-[#615d54]">
             <span>
               <Truck className="mr-2 inline size-4 text-[#9b6a18]" /> Доставка
               включена
@@ -324,10 +313,10 @@ export default function Homepage() {
             </span>
           </div>
 
-          <div className="hidden min-h-16 border-b border-l border-[#e2d7c3] px-5 text-right lg:flex lg:flex-col lg:justify-center">
+          <div className="flex flex-col justify-center px-5 text-right">
             <a
               href={`tel:${PHONE}`}
-              className="font-heading text-2xl font-black"
+              className="whitespace-nowrap font-heading text-2xl font-black"
             >
               <Phone className="mr-2 inline size-6 text-[#d99600]" />
               {PHONE_LABEL}
@@ -339,31 +328,54 @@ export default function Homepage() {
 
           <nav
             aria-label="Головна навігація"
-            className="col-start-2 col-end-4 row-start-2 hidden min-h-16 items-center justify-between gap-5 px-7 text-base font-black lg:flex"
+            className="col-start-2 col-end-5 row-start-2 grid grid-cols-[max-content_190px_1fr] items-center px-7 text-base font-black"
           >
-            <a href="#products" className="hover:text-[#b17300]">
-              Береза
-            </a>
-            <a href="#products" className="hover:text-[#b17300]">
-              Вільха
-            </a>
-            <a href="#products" className="hover:text-[#b17300]">
-              Сосна
-            </a>
-            <a href="#benefits" className="hover:text-[#b17300]">
-              Про нас
-            </a>
-            <a href="#benefits" className="hover:text-[#b17300]">
-              Доставка
-            </a>
-            <a href="#benefits" className="hover:text-[#b17300]">
-              Оплата
-            </a>
-            <a href="#contacts" className="hover:text-[#b17300]">
+            <div className="flex items-center gap-7">
+              <a href="#products" className="hover:text-[#b17300]">
+                Береза
+              </a>
+              <a href="#products" className="hover:text-[#b17300]">
+                Вільха
+              </a>
+              <a href="#products" className="hover:text-[#b17300]">
+                Сосна
+              </a>
+              <a href="#benefits" className="hover:text-[#b17300]">
+                Про нас
+              </a>
+              <a href="#benefits" className="hover:text-[#b17300]">
+                Доставка
+              </a>
+              <a href="#benefits" className="hover:text-[#b17300]">
+                Оплата
+              </a>
+            </div>
+            <a
+              href="#contacts"
+              className="col-start-3 justify-self-start hover:text-[#b17300]"
+            >
               Контакти
             </a>
           </nav>
+        </div>
 
+        <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-4 py-3 lg:hidden">
+          <a href="#top" className="flex min-w-0 items-center gap-3">
+            <img
+              src="/logo.png"
+              alt="Дрова у Діда Івана"
+              className="size-16 shrink-0 object-contain"
+            />
+            <div>
+              <p className="font-heading text-xl font-black leading-none">
+                Дрова
+                <span className="block">у Діда Івана</span>
+              </p>
+              <p className="mt-1 text-xs font-bold italic text-[#8a652c]">
+                З лісу — додому!
+              </p>
+            </div>
+          </a>
           <button
             type="button"
             onClick={() => setMobileMenuOpen((open) => !open)}
@@ -407,57 +419,92 @@ export default function Homepage() {
         )}
       </header>
 
-      <section id="advice" className="bg-[#10291c] text-white">
-        <div className="mx-auto flex max-w-[1180px] items-center gap-4 px-4 py-4 sm:px-6">
+      <section
+        id="top"
+        className="relative border-b border-[#d8c8aa] bg-[#fffaf0]"
+      >
+        <div className="relative mx-auto min-h-[280px] max-w-[1280px] overflow-hidden md:min-h-[400px] lg:hidden">
           <img
-            src="/logo.png"
-            alt=""
-            className="size-20 shrink-0 object-contain sm:size-24"
+            src="/hero-grandfather-v3.png"
+            alt="Дід Іван тримає колоті березові дрова"
+            className="absolute inset-0 size-full object-cover object-center md:object-top"
           />
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-black uppercase tracking-[.14em] text-[#f0b83d]">
-              Дід Іван радить
-            </p>
-            <p className="mt-1 font-heading text-2xl font-black uppercase leading-tight sm:text-4xl">
-              Беріть дрова з запасом
-            </p>
-            <p className="mt-1 hidden text-base font-semibold text-white/75 md:block">
-              Чим більше замовлення — тим нижча ціна за складометр.
-            </p>
-          </div>
-          <a
-            href="#calculator"
-            className="hidden min-h-12 shrink-0 items-center justify-center rounded-lg bg-[#f0b83d] px-5 text-base font-black text-primary sm:flex"
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 390 280"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-0 size-full md:hidden"
           >
-            Порахувати вигоду
-          </a>
-        </div>
-      </section>
-
-      <section className="relative isolate overflow-hidden border-b border-[#d8c8aa]">
-        <img
-          src="/hero-grandfather-v3.png"
-          alt="Дід Іван тримає колоті березові дрова біля дровітні"
-          className="absolute inset-0 -z-20 size-full object-cover object-[62%_center] md:object-center"
-        />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(255,250,240,.98)_0%,rgba(255,250,240,.92)_47%,rgba(255,250,240,.08)_72%,transparent_100%)] md:bg-[linear-gradient(90deg,rgba(255,250,240,.7)_0%,rgba(255,250,240,.22)_45%,transparent_65%)]" />
-        <div className="mx-auto flex min-h-[520px] max-w-[1280px] items-center px-4 py-10 sm:px-6 lg:min-h-[590px] lg:py-14">
-          <div className="max-w-[690px]">
-            <p className="inline-flex rounded-full border border-[#d8c8aa] bg-[#fffaf0]/90 px-4 py-2 text-sm font-black uppercase tracking-wide">
-              Береза · Вільха · Сосна
-            </p>
-            <h1 className="mt-5 font-heading text-[clamp(2.9rem,5.1vw,5rem)] font-black uppercase leading-[.88] tracking-[-.04em]">
-              Більше дров —
-              <span className="block text-[#d08a00]">більша економія</span>
-              <span className="block text-[#9b3724]">в гривнях!</span>
-            </h1>
-            <p className="mt-6 max-w-xl text-xl font-semibold leading-snug sm:text-2xl">
-              Замовляйте більший об’єм та економте{' '}
-              <strong className="text-[#9b3724]">до 6 000 грн</strong> на одному
-              замовленні.
-            </p>
+            <defs>
+              <linearGradient id="mobile-hero-cream" x1="0" x2="1">
+                <stop offset="0" stopColor="#f4ecdc" />
+                <stop offset="0.82" stopColor="#f4ecdc" />
+                <stop offset="1" stopColor="#f4ecdc" stopOpacity="0.88" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0 0H238C241 26 225 49 222 75C219 101 212 125 217 150C223 178 216 203 213 228C211 249 208 267 202 280H0Z"
+              fill="url(#mobile-hero-cream)"
+            />
+          </svg>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 820 400"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-0 hidden size-full md:block"
+          >
+            <path
+              d="M0 0H438C451 42 425 81 431 121C438 166 416 202 420 247C425 298 398 350 374 400H0Z"
+              fill="#f4ecdc"
+            />
+          </svg>
+          <div className="absolute inset-y-0 left-0 flex w-[67%] items-center px-4 py-5 md:w-[50%] md:px-8">
+            <div>
+              <h1 className="font-heading text-[1.65rem] font-black uppercase leading-[.9] tracking-[-.035em] text-[#29432f] md:text-[2.6rem]">
+                Більше дров —
+                <span className="block text-[#c38322]">більша економія</span>
+                <span className="block text-[#a75a2a]">в гривнях!</span>
+              </h1>
+              <p className="mt-3 max-w-[200px] text-sm font-semibold leading-snug text-[#344334] md:mt-5 md:max-w-[310px] md:text-lg">
+                Економте{' '}
+                <strong className="text-[#a75a2a]">до 36 400 грн</strong> на
+                замовленні.
+              </p>
+            </div>
           </div>
         </div>
+
+        <div className="mx-auto hidden min-h-[540px] max-w-[1280px] grid-cols-[1.15fr_.85fr] lg:grid">
+          <div className="paper-texture flex items-center px-12 py-12">
+            <div className="max-w-[610px]">
+              <h1 className="font-heading text-[3.75rem] font-black uppercase leading-[.9] tracking-[-.04em] text-[#29432f] xl:text-[4rem]">
+                Більше дров —
+                <span className="block whitespace-nowrap text-[#c38322]">
+                  більша економія
+                </span>
+                <span className="block text-[#a75a2a]">в гривнях!</span>
+              </h1>
+              <p className="mt-5 max-w-xl text-2xl font-semibold leading-snug text-[#344334]">
+                Замовляйте більший об’єм та економте{' '}
+                <strong className="text-[#a75a2a]">до 36 400 грн</strong> на
+                одному замовленні.
+              </p>
+            </div>
+          </div>
+          <div className="relative min-h-[540px] overflow-hidden">
+            <img
+              src="/hero-winter-background-v1.png"
+              alt="Зимова дровітня зі складеними дровами"
+              className="absolute inset-0 size-full object-cover object-[68%_center]"
+            />
+          </div>
+        </div>
+        <img
+          src="/grandfather-cutout-v4.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-[-445px] left-[62%] z-20 hidden h-[1050px] max-w-none -translate-x-1/2 object-contain [clip-path:inset(0_0_42%_0)] drop-shadow-[0_18px_22px_rgba(44,29,15,.18)] lg:block"
+        />
       </section>
 
       <SavingsCalculator
@@ -468,16 +515,18 @@ export default function Homepage() {
       />
 
       <section id="benefits" className="paper-texture px-4 pb-12 sm:px-6">
-        <div className="mx-auto grid max-w-[1180px] gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-[1180px] grid-cols-3 gap-2 sm:gap-4">
           {benefits.map(({ icon: Icon, title, text }) => (
             <div
               key={title}
-              className="flex items-center gap-3 border-b border-[#d8c8aa] py-4 lg:border-b-0"
+              className="flex flex-col items-center gap-2 py-4 text-center sm:flex-row sm:gap-3 sm:text-left"
             >
               <Icon className="size-8 shrink-0 text-[#9b6a18]" />
               <div>
-                <p className="text-base font-black">{title}</p>
-                <p className="text-sm font-semibold text-[#67635b]">{text}</p>
+                <p className="text-sm font-black sm:text-base">{title}</p>
+                <p className="text-xs font-semibold text-[#67635b] sm:text-sm">
+                  {text}
+                </p>
               </div>
             </div>
           ))}
@@ -507,7 +556,11 @@ export default function Homepage() {
                   role="img"
                   aria-label={`Колоті дрова: ${wood.name}`}
                   className="product-photo min-h-52"
-                  style={{ backgroundPosition: wood.imagePosition }}
+                  style={{
+                    backgroundImage: `linear-gradient(180deg, rgba(10, 28, 18, 0) 58%, rgba(10, 28, 18, 0.16)), url('${wood.image}')`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                  }}
                 />
                 <div className="flex flex-col p-5">
                   <h3 className="font-heading text-3xl font-black uppercase">
@@ -516,20 +569,24 @@ export default function Homepage() {
                   <p className="mt-2 text-base font-semibold text-[#5f625b]">
                     {wood.description}
                   </p>
-                  <p className="mt-5 text-sm font-black uppercase text-[#776b59]">
-                    від
+                  <p className="mt-3 text-sm font-bold leading-relaxed text-[#776b59]">
+                    {wood.bestFor}
                   </p>
-                  <p className="font-heading text-4xl font-black">
-                    {formatPrice(wood.tiers[2])}{' '}
-                    <span className="text-lg">грн / м³</span>
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => chooseWood(wood.id)}
-                    className="mt-5 min-h-13 rounded-lg bg-primary px-4 text-base font-black text-white"
-                  >
-                    Розрахувати вигоду
-                  </button>
+                  <div className="mt-auto flex flex-col gap-3 pt-7 xl:flex-row">
+                    <button
+                      type="button"
+                      onClick={() => chooseWood(wood.id)}
+                      className="min-h-13 flex-1 rounded-lg bg-primary px-4 text-base font-black text-white"
+                    >
+                      Розрахувати вигоду
+                    </button>
+                    <a
+                      href={`tel:${PHONE}`}
+                      className="flex min-h-13 flex-1 items-center justify-center gap-2 rounded-lg bg-[#e2a72c] px-4 text-base font-black text-primary"
+                    >
+                      <Phone className="size-5" /> Подзвонити
+                    </a>
+                  </div>
                 </div>
               </article>
             ))}

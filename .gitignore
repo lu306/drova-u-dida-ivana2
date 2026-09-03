@@ -36,3 +36,9 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# local conversion tools and temporary archives
+/Scripts/
+/lib/site-packages/
+/tmp/
+/site-build.tar.gz

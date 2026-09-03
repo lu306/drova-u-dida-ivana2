@@ -70,7 +70,11 @@ export function ProductCard({
           'product-photo relative min-h-56 w-full bg-[#a77d55]',
           compact && 'min-h-44',
         )}
-        style={{ backgroundPosition: wood.imagePosition }}
+        style={{
+          backgroundImage: `linear-gradient(180deg, rgba(10, 28, 18, 0) 58%, rgba(10, 28, 18, 0.16)), url('${wood.image}')`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+        }}
       >
         <div className="absolute left-4 top-4 rounded-full bg-[#fffaf0]/95 px-3 py-2 text-sm font-black text-primary shadow-md">
           Колоті · готові до використання
@@ -96,10 +100,10 @@ export function ProductCard({
         </p>
         <div className="mt-2 rounded-2xl bg-[#f5e6cd] p-4">
           <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-[#9b3724]">
-            <Tags className="size-5" /> Від 10 складометрів
+            <Tags className="size-5" /> Від 20 складометрів
           </p>
           <p className="mt-1 font-heading text-4xl font-black text-[#9b3724] sm:text-5xl">
-            {formatPrice(wood.tiers[2])}{' '}
+            {formatPrice(getUnitPrice(wood, 20))}{' '}
             <span className="text-xl">грн / скл. м</span>
           </p>
         </div>
@@ -110,12 +114,13 @@ export function ProductCard({
               key={row.label}
               className={cn(
                 'flex items-center justify-between gap-3 px-4 py-2.5',
-                index !== 2 && 'border-b border-[#e6dcc9]',
-                index === 2 && 'bg-[#f0f5ef] font-black text-primary',
+                index !== PRICE_ROWS.length - 1 && 'border-b border-[#e6dcc9]',
+                index === PRICE_ROWS.length - 1 &&
+                  'bg-[#f0f5ef] font-black text-primary',
               )}
             >
               <span>{row.label}</span>
-              <strong>{formatPrice(wood.tiers[row.tier])} грн</strong>
+              <strong>{formatPrice(wood.prices[row.quantity])} грн</strong>
             </div>
           ))}
         </div>
@@ -181,7 +186,7 @@ export function PriceTable({ className }: { className?: string }) {
                 </th>
                 {WOODS.map((wood) => (
                   <td key={wood.id} className="px-5 py-5 font-black">
-                    {formatPrice(wood.tiers[row.tier])} грн
+                    {formatPrice(wood.prices[row.quantity])} грн
                   </td>
                 ))}
               </tr>
