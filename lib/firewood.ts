@@ -1,7 +1,7 @@
 export const PHONE = '+380989661834';
 export const PHONE_LABEL = '+380 98 966 18 34';
 
-export type WoodId = 'birch' | 'alder' | 'pine';
+export type WoodId = 'birch' | 'alder' | 'pine' | 'hardwood';
 
 export type WoodProduct = {
   id: WoodId;
@@ -51,6 +51,24 @@ const PINE_PRICES: Record<number, number> = {
   25: 3470,
 };
 
+const HARDWOOD_PRICES: Record<number, number> = {
+  3: 6270,
+  4: 6050,
+  5: 5930,
+  6: 5760,
+  7: 5500,
+  8: 5300,
+  9: 5200,
+  10: 5130,
+  11: 5110,
+  12: 5090,
+  13: 5070,
+  14: 5050,
+  15: 5030,
+  20: 4960,
+  25: 4930,
+};
+
 export const WOODS: WoodProduct[] = [
   {
     id: 'birch',
@@ -87,6 +105,19 @@ export const WOODS: WoodProduct[] = [
     prices: PINE_PRICES,
     image: '/firewood-pine-v1.png',
     imagePosition: '100% 50%',
+  },
+  {
+    id: 'hardwood',
+    name: 'Тверді породи',
+    genitive: 'твердих порід',
+    description:
+      'Дуб, граб і ясен — щільні дрова з високою тепловіддачею. Довго горять і добре тримають жар.',
+    bestFor:
+      'Найкращий вибір для тривалого опалення печі та твердопаливного котла.',
+    ordinaryPrice: 6270,
+    prices: HARDWOOD_PRICES,
+    image: '/firewood-hardwood-v1.png',
+    imagePosition: '50% 50%',
   },
 ];
 

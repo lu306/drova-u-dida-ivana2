@@ -95,7 +95,7 @@ function SavingsCalculator({
           <p className="mt-1 text-sm font-semibold text-white/75 sm:text-lg">
             Чим більше замовлення — тим менша ціна за складометр
           </p>
-          <div className="mx-auto mt-3 grid max-w-[560px] grid-cols-3 gap-2 sm:mt-4 sm:gap-3">
+          <div className="mx-auto mt-3 grid max-w-[760px] grid-cols-2 gap-2 sm:mt-4 sm:grid-cols-4 sm:gap-3">
             {WOODS.map((item) => (
               <button
                 key={item.id}
@@ -339,6 +339,9 @@ export default function Homepage() {
               <a href="#products" className="hover:text-[#b17300]">
                 Сосна
               </a>
+              <a href="#products" className="hover:text-[#b17300]">
+                Тверді породи
+              </a>
               <a href="#benefits" className="hover:text-[#b17300]">
                 Про нас
               </a>
@@ -401,6 +404,7 @@ export default function Homepage() {
               ['Береза', '#products'],
               ['Вільха', '#products'],
               ['Сосна', '#products'],
+              ['Тверді породи', '#products'],
               ['Розрахунок', '#calculator'],
               ['Про нас', '#benefits'],
               ['Контакти', '#contacts'],
@@ -545,7 +549,7 @@ export default function Homepage() {
             <span className="h-px flex-1 bg-[#cda86c]" />
           </div>
 
-          <div className="mt-9 grid gap-5 lg:grid-cols-3">
+          <div className="mt-9 grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
             {WOODS.map((wood) => (
               <article
                 key={wood.id}
@@ -571,7 +575,7 @@ export default function Homepage() {
                   <p className="mt-3 text-sm font-bold leading-relaxed text-[#776b59]">
                     {wood.bestFor}
                   </p>
-                  <div className="mt-auto flex flex-col gap-3 pt-7 xl:flex-row">
+                  <div className="mt-auto flex flex-col gap-3 pt-7">
                     <button
                       type="button"
                       onClick={() => chooseWood(wood.id)}
@@ -618,7 +622,7 @@ export default function Homepage() {
                 Дрова у Діда Івана
               </p>
               <p className="text-base font-semibold text-white/65">
-                Береза · Вільха · Сосна
+                Береза · Вільха · Сосна · Тверді породи
               </p>
             </div>
           </div>

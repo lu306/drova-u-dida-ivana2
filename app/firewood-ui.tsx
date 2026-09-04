@@ -239,7 +239,7 @@ export function OrderCalculator({
     >
       <div className="p-5 sm:p-8">
         <p className="step-label">Крок 1 · Оберіть дрова</p>
-        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {WOODS.map((item) => (
             <Button
               key={item.id}
