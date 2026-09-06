@@ -20,6 +20,13 @@ export const metadata: Metadata = {
   title: 'Колоті дрова з доставкою — Дрова у Діда Івана',
   description:
     'Колоті дрова по Києву та області: береза, вільха, сосна, дуб, граб і ясен. Доставка у вартості, ціна нижча при більшому замовленні.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
   openGraph: {
     title: 'Колоті дрова з доставкою по Києву та області',
     description:
