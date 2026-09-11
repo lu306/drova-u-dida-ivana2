@@ -470,7 +470,7 @@ export default function Homepage() {
               </h1>
               <p className="mt-3 max-w-[200px] text-sm font-semibold leading-snug text-[#344334] md:mt-5 md:max-w-[310px] md:text-lg">
                 Економте{' '}
-                <strong className="text-[#a75a2a]">до 36 400 грн</strong> на
+                <strong className="text-[#a75a2a]">до 38 000 грн</strong> на
                 замовленні.
               </p>
             </div>
@@ -489,7 +489,7 @@ export default function Homepage() {
               </h1>
               <p className="mt-5 max-w-xl text-2xl font-semibold leading-snug text-[#344334]">
                 Замовляйте більший об’єм та економте{' '}
-                <strong className="text-[#a75a2a]">до 36 400 грн</strong> на
+                <strong className="text-[#a75a2a]">до 38 000 грн</strong> на
                 одному замовленні.
               </p>
             </div>
