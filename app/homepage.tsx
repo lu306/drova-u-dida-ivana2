@@ -6,9 +6,12 @@ import {
   Banknote,
   Check,
   Clock3,
+  MessageCircle,
   Menu,
   PackageCheck,
   Phone,
+  PhoneCall,
+  Send,
   ShieldCheck,
   Truck,
   Users,
@@ -275,7 +278,7 @@ export default function Homepage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f6efdf] pb-[76px] text-primary sm:pb-0">
       <header className="relative z-10 border-b border-[#d8c8aa] bg-[#fffaf0]">
-        <div className="mx-auto hidden max-w-[1280px] grid-cols-[185px_255px_1fr_250px] grid-rows-[96px_60px] px-6 pt-2 lg:grid">
+        <div className="mx-auto hidden max-w-[1280px] grid-cols-[185px_245px_1fr_285px] grid-rows-[96px_60px] px-6 pt-2 lg:grid xl:grid-cols-[185px_255px_1fr_345px]">
           <a
             href="#top"
             className="row-span-2 flex items-center justify-center pr-4"
@@ -312,14 +315,46 @@ export default function Homepage() {
             </span>
           </div>
 
-          <div className="flex flex-col justify-center px-5 text-right">
-            <a
-              href={`tel:${PHONE}`}
-              className="whitespace-nowrap font-heading text-2xl font-black"
-            >
-              <Phone className="mr-2 inline size-6 text-[#d99600]" />
-              {PHONE_LABEL}
-            </a>
+          <div className="flex flex-col justify-center px-3 text-right xl:px-5">
+            <div className="flex items-center justify-end gap-2 xl:gap-3">
+              <a
+                href={`tel:${PHONE}`}
+                className="flex items-center whitespace-nowrap font-heading text-xl font-black xl:text-2xl"
+              >
+                <Phone className="mr-1.5 size-5 text-[#d99600] xl:mr-2 xl:size-6" />
+                {PHONE_LABEL}
+              </a>
+              <div className="flex items-center gap-1.5">
+                <a
+                  href={`https://t.me/${PHONE}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Написати в Telegram"
+                  title="Telegram"
+                  className="flex size-8 items-center justify-center rounded-full bg-[#229ED9] text-white transition hover:scale-105 hover:brightness-95 xl:size-9"
+                >
+                  <Send className="size-4 xl:size-[1.15rem]" />
+                </a>
+                <a
+                  href={`viber://chat?number=${encodeURIComponent(PHONE)}`}
+                  aria-label="Написати у Viber"
+                  title="Viber"
+                  className="flex size-8 items-center justify-center rounded-full bg-[#7360F2] text-white transition hover:scale-105 hover:brightness-95 xl:size-9"
+                >
+                  <PhoneCall className="size-4 xl:size-[1.15rem]" />
+                </a>
+                <a
+                  href={`https://wa.me/${PHONE.replace(/\D/g, '')}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Написати у WhatsApp"
+                  title="WhatsApp"
+                  className="flex size-8 items-center justify-center rounded-full bg-[#25D366] text-white transition hover:scale-105 hover:brightness-95 xl:size-9"
+                >
+                  <MessageCircle className="size-4 xl:size-[1.15rem]" />
+                </a>
+              </div>
+            </div>
             <p className="text-sm font-bold text-[#625f56]">
               Пн–Нд: 08:00–20:00
             </p>
