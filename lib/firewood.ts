@@ -1,5 +1,5 @@
-export const PHONE = '+380989661834';
-export const PHONE_LABEL = '+380 98 966 18 34';
+export const PHONE = '+380770984770';
+export const PHONE_LABEL = '+380 77 098 47 70';
 
 export type WoodId = 'birch' | 'alder' | 'pine' | 'hardwood';
 
