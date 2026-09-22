@@ -16,29 +16,11 @@ export type WoodProduct = {
 };
 
 const BIRCH_ALDER_PRICES: Record<number, number> = {
-  3: 5900,
-  4: 5600,
-  5: 5300,
-  6: 5100,
-  7: 4700,
-  8: 4400,
-  9: 4300,
-  10: 4200,
-  11: 4200,
-  12: 4200,
-  13: 4200,
-  14: 4100,
-  15: 4100,
-  20: 4000,
-  25: 3900,
-};
-
-const PINE_PRICES: Record<number, number> = {
   3: 5600,
   4: 5200,
   5: 4900,
-  6: 4800,
-  7: 4400,
+  6: 4400,
+  7: 4200,
   8: 4100,
   9: 4000,
   10: 3900,
@@ -51,22 +33,40 @@ const PINE_PRICES: Record<number, number> = {
   25: 3700,
 };
 
+const PINE_PRICES: Record<number, number> = {
+  3: 5300,
+  4: 4800,
+  5: 4500,
+  6: 4100,
+  7: 3900,
+  8: 3800,
+  9: 3800,
+  10: 3700,
+  11: 3700,
+  12: 3700,
+  13: 3700,
+  14: 3700,
+  15: 3600,
+  20: 3600,
+  25: 3500,
+};
+
 const HARDWOOD_PRICES: Record<number, number> = {
-  3: 6600,
-  4: 6300,
-  5: 6100,
-  6: 6100,
-  7: 5800,
-  8: 5600,
-  9: 5500,
-  10: 5400,
-  11: 5400,
-  12: 5400,
-  13: 5300,
-  14: 5300,
-  15: 5300,
-  20: 5200,
-  25: 5100,
+  3: 6300,
+  4: 5900,
+  5: 5700,
+  6: 5400,
+  7: 5300,
+  8: 5200,
+  9: 5100,
+  10: 4900,
+  11: 4900,
+  12: 4900,
+  13: 4900,
+  14: 4900,
+  15: 4900,
+  20: 4800,
+  25: 4700,
 };
 
 export const WOODS: WoodProduct[] = [
@@ -77,7 +77,7 @@ export const WOODS: WoodProduct[] = [
     description:
       'Щільні дрова з високою тепловіддачею. Горять довго й рівно, добре тримають жар.',
     bestFor: 'Добрий вибір для печі, каміна та твердопаливного котла.',
-    ordinaryPrice: 5900,
+    ordinaryPrice: 5600,
     prices: BIRCH_ALDER_PRICES,
     image: '/firewood-birch-v1.png',
     imagePosition: '0% 50%',
@@ -89,7 +89,7 @@ export const WOODS: WoodProduct[] = [
     description:
       'Швидко розпалюється, дає м’яке рівне тепло та утворює небагато диму й сажі.',
     bestFor: 'Підходить для печі, каміна та лазні.',
-    ordinaryPrice: 5900,
+    ordinaryPrice: 5600,
     prices: BIRCH_ALDER_PRICES,
     image: '/firewood-alder-v1.png',
     imagePosition: '50% 50%',
@@ -101,7 +101,7 @@ export const WOODS: WoodProduct[] = [
     description:
       'Легко розпалюється та швидко прогріває приміщення. Має приємний хвойний аромат.',
     bestFor: 'Зручна для розпалювання, печі та твердопаливного котла.',
-    ordinaryPrice: 5600,
+    ordinaryPrice: 5300,
     prices: PINE_PRICES,
     image: '/firewood-pine-v1.png',
     imagePosition: '100% 50%',
@@ -114,7 +114,7 @@ export const WOODS: WoodProduct[] = [
       'Дуб, граб і ясен — щільні дрова з високою тепловіддачею. Довго горять і добре тримають жар.',
     bestFor:
       'Найкращий вибір для тривалого опалення печі та твердопаливного котла.',
-    ordinaryPrice: 6600,
+    ordinaryPrice: 6300,
     prices: HARDWOOD_PRICES,
     image: '/firewood-hardwood-v1.png',
     imagePosition: '50% 50%',
