@@ -6,6 +6,7 @@ import {
   Banknote,
   Check,
   Clock3,
+  Gift,
   MessageCircle,
   Menu,
   PackageCheck,
@@ -88,7 +89,7 @@ function SavingsCalculator({
   return (
     <section
       id="calculator"
-      className="relative z-30 mx-auto -mt-[70px] max-w-[1280px] px-3 pb-8 sm:-mt-[90px] sm:px-6 lg:-mt-[115px]"
+      className="relative z-30 mx-auto max-w-[1280px] px-3 pt-4 pb-8 sm:px-6 sm:pt-6"
     >
       <div className="overflow-hidden rounded-[1.35rem] border-4 border-[#3c5b3d] bg-[#29462f] p-3 text-white shadow-[0_18px_45px_rgba(45,65,43,.2)] sm:rounded-[1.7rem] sm:p-7">
         <div className="text-center">
@@ -457,92 +458,36 @@ export default function Homepage() {
         )}
       </header>
 
-      <section
-        id="top"
-        className="relative border-b border-[#d8c8aa] bg-[#fffaf0]"
-      >
-        <div className="relative mx-auto min-h-[280px] max-w-[1280px] overflow-hidden md:min-h-[400px] lg:hidden">
+      <section id="top" className="bg-[#fffaf0]">
+        <h1 className="sr-only">
+          Промокод ДідІван2026 — додаткова знижка на всі види дров
+        </h1>
+        <div className="mx-auto hidden max-w-[1280px] lg:block">
           <img
-            src="/hero-grandfather-v3.png"
-            alt="Дід Іван тримає колоті березові дрова"
-            className="absolute inset-0 size-full object-cover object-center md:object-top"
+            src="/hero-promo-reference.png"
+            alt="Дід Іван з дровами. Промокод ДідІван2026 — додаткова знижка на всі види дров. Доставка включена, замовлення від 3 складометрів."
+            className="block h-auto w-full"
           />
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 390 280"
-            preserveAspectRatio="none"
-            className="pointer-events-none absolute inset-0 size-full md:hidden"
-          >
-            <defs>
-              <linearGradient id="mobile-hero-cream" x1="0" x2="1">
-                <stop offset="0" stopColor="#f4ecdc" />
-                <stop offset="0.82" stopColor="#f4ecdc" />
-                <stop offset="1" stopColor="#f4ecdc" stopOpacity="0.88" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0 0H238C241 26 225 49 222 75C219 101 212 125 217 150C223 178 216 203 213 228C211 249 208 267 202 280H0Z"
-              fill="url(#mobile-hero-cream)"
-            />
-          </svg>
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 820 400"
-            preserveAspectRatio="none"
-            className="pointer-events-none absolute inset-0 hidden size-full md:block"
-          >
-            <path
-              d="M0 0H438C451 42 425 81 431 121C438 166 416 202 420 247C425 298 398 350 374 400H0Z"
-              fill="#f4ecdc"
-            />
-          </svg>
-          <div className="absolute inset-y-0 left-0 flex w-[67%] items-center px-4 py-5 md:w-[50%] md:px-8">
-            <div>
-              <h1 className="font-heading text-[1.65rem] font-black uppercase leading-[.9] tracking-[-.035em] text-[#29432f] md:text-[2.6rem]">
-                Більше дров —
-                <span className="block text-[#c38322]">більша економія</span>
-                <span className="block text-[#a75a2a]">в гривнях!</span>
-              </h1>
-              <p className="mt-3 max-w-[200px] text-sm font-semibold leading-snug text-[#344334] md:mt-5 md:max-w-[310px] md:text-lg">
-                Економте{' '}
-                <strong className="text-[#a75a2a]">до 38 000 грн</strong> на
-                замовленні.
-              </p>
+        </div>
+        <div className="reference-mobile mx-auto max-w-[680px] lg:hidden">
+          <div className="reference-mobile-photo" aria-hidden="true" />
+          <div className="reference-mobile-poster">
+            <div className="reference-mobile-wood">Промокод</div>
+            <div className="reference-mobile-code">ДідІван2026</div>
+            <div className="reference-mobile-offer">
+              <div>
+                <p>Додаткова знижка</p>
+                <span>на всі види дров</span>
+              </div>
+              <Gift aria-hidden="true" />
             </div>
           </div>
-        </div>
-
-        <div className="mx-auto hidden min-h-[540px] max-w-[1280px] grid-cols-[1.15fr_.85fr] lg:grid">
-          <div className="paper-texture flex items-center px-12 py-12">
-            <div className="max-w-[610px]">
-              <h1 className="font-heading text-[3.75rem] font-black uppercase leading-[.9] tracking-[-.04em] text-[#29432f] xl:text-[4rem]">
-                Більше дров —
-                <span className="block whitespace-nowrap text-[#c38322]">
-                  більша економія
-                </span>
-                <span className="block text-[#a75a2a]">в гривнях!</span>
-              </h1>
-              <p className="mt-5 max-w-xl text-2xl font-semibold leading-snug text-[#344334]">
-                Замовляйте більший об’єм та економте{' '}
-                <strong className="text-[#a75a2a]">до 38 000 грн</strong> на
-                одному замовленні.
-              </p>
-            </div>
-          </div>
-          <div className="relative min-h-[540px] overflow-hidden">
-            <img
-              src="/hero-winter-background-v1.png"
-              alt="Зимова дровітня зі складеними дровами"
-              className="absolute inset-0 size-full object-cover object-[68%_center]"
-            />
+          <div className="reference-mobile-trust">
+            <div><Truck aria-hidden="true" /><span>Доставка<br />включена</span></div>
+            <div><Warehouse aria-hidden="true" /><span>Від 3<br />складометрів</span></div>
+            <div><ShieldCheck aria-hidden="true" /><span>Якісні<br />дрова</span></div>
           </div>
         </div>
-        <img
-          src="/grandfather-cutout-v4.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-[-445px] left-[62%] z-20 hidden h-[1050px] max-w-none -translate-x-1/2 object-contain [clip-path:inset(0_0_42%_0)] drop-shadow-[0_18px_22px_rgba(44,29,15,.18)] lg:block"
-        />
       </section>
 
       <SavingsCalculator
