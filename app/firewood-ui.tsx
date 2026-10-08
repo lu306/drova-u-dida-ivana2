@@ -96,7 +96,8 @@ export function ProductCard({
         </div>
 
         <p className="mt-4 text-base font-bold text-[#6e6a60]">
-          Звичайна ціна: <s>{formatPrice(wood.ordinaryPrice)} грн</s>
+          Ціна при замовленні 3 скл. м:{' '}
+          <s>{formatPrice(wood.ordinaryPrice)} грн</s>
         </p>
         <div className="mt-2 rounded-2xl bg-[#f5e6cd] p-4">
           <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-[#9b3724]">
@@ -173,12 +174,12 @@ export function PriceTable({ className }: { className?: string }) {
                 key={row.label}
                 className={cn(
                   'border-t border-[#ddd0b7]',
-                  rowIndex === 2 && 'bg-[#e6f0e7] text-primary',
+                  row.quantity === 20 && 'bg-[#e6f0e7] text-primary',
                 )}
               >
                 <th scope="row" className="px-5 py-5 text-xl font-black">
                   {row.label}
-                  {rowIndex === 2 && (
+                  {row.quantity === 20 && (
                     <span className="ml-2 rounded-full bg-[#b84a2f] px-2.5 py-1 text-xs text-white">
                       Найвигідніше
                     </span>
@@ -239,7 +240,7 @@ export function OrderCalculator({
     >
       <div className="p-5 sm:p-8">
         <p className="step-label">Крок 1 · Оберіть дрова</p>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {WOODS.map((item) => (
             <Button
               key={item.id}
@@ -318,7 +319,9 @@ export function OrderCalculator({
             {quantity} складометрів {wood.genitive}
           </h3>
           <div className="mt-6 rounded-2xl bg-[#fff8eb]/80 p-5">
-            <p className="text-base font-bold text-[#6d6556]">Звичайна сума</p>
+            <p className="text-base font-bold text-[#6d6556]">
+              За ціною 3 скл. м
+            </p>
             <p className="text-2xl font-bold text-[#7a6f5b]">
               <s>{formatPrice(ordinaryTotal)} грн</s>
             </p>

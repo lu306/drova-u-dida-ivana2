@@ -4,9 +4,6 @@ import { useEffect, useState } from 'react';
 import {
   BadgeCheck,
   Banknote,
-  Check,
-  Clock3,
-  Gift,
   MessageCircle,
   Menu,
   PackageCheck,
@@ -24,6 +21,8 @@ import {
   PHONE,
   PHONE_LABEL,
   WOODS,
+  PRICE_QUANTITIES,
+  PRICE_ROWS,
   formatPrice,
   getUnitPrice,
   getWood,
@@ -31,7 +30,7 @@ import {
 } from '@/lib/firewood';
 import { cn } from '@/lib/utils';
 
-const quantities = [5, 10, 15, 20];
+const quantities: readonly number[] = PRICE_QUANTITIES;
 
 const benefits = [
   {
@@ -99,7 +98,7 @@ function SavingsCalculator({
           <p className="mt-1 text-sm font-semibold text-white/75 sm:text-lg">
             Чим більше замовлення — тим менша ціна за складометр
           </p>
-          <div className="mx-auto mt-3 grid max-w-[760px] grid-cols-2 gap-2 sm:mt-4 sm:grid-cols-4 sm:gap-3">
+          <div className="mx-auto mt-3 grid max-w-[760px] grid-cols-2 gap-2 sm:mt-4 sm:grid-cols-3 sm:gap-3">
             {WOODS.map((item) => (
               <button
                 key={item.id}
@@ -148,7 +147,9 @@ function SavingsCalculator({
             </p>
             <div className="grid sm:grid-cols-[.8fr_1fr_1.15fr]">
               <div className="flex flex-col justify-center border-b border-[#d8c8aa] p-5 text-center sm:border-b-0 sm:border-r sm:p-7">
-                <p className="text-base font-bold text-[#6b665b]">Було</p>
+                <p className="text-base font-bold text-[#6b665b]">
+                  За ціною 3 скл. м
+                </p>
                 <p className="mt-1 font-heading text-3xl font-black">
                   <s className="decoration-[#b84a2f] decoration-4">
                     {formatPrice(ordinaryTotal)}
@@ -165,7 +166,7 @@ function SavingsCalculator({
               </div>
 
               <div className="flex flex-col items-center justify-center p-5 text-center sm:p-7">
-                <p className="text-base font-bold text-[#6b665b]">Стало</p>
+                <p className="text-base font-bold text-[#6b665b]">Ваша сума</p>
                 <p className="mt-1 font-heading text-4xl font-black">
                   {formatPrice(total)} <span className="text-lg">грн</span>
                 </p>
@@ -441,6 +442,7 @@ export default function Homepage() {
               ['Вільха', '#products'],
               ['Сосна', '#products'],
               ['Тверді породи', '#products'],
+              ['Клен / граб', '#products'],
               ['Розрахунок', '#calculator'],
               ['Про нас', '#benefits'],
               ['Контакти', '#contacts'],
@@ -458,35 +460,33 @@ export default function Homepage() {
         )}
       </header>
 
-      <section id="top" className="bg-[#fffaf0]">
-        <h1 className="sr-only">
-          Промокод ДідІван2026 — додаткова знижка на всі види дров
-        </h1>
-        <div className="mx-auto hidden max-w-[1280px] lg:block">
-          <img
-            src="/hero-promo-reference.png"
-            alt="Дід Іван з дровами. Промокод ДідІван2026 — додаткова знижка на всі види дров. Доставка включена, замовлення від 3 складометрів."
-            className="block h-auto w-full"
-          />
+      <section id="top" className="promo-hero">
+        <div className="promo-inner">
+          <div className="promo-copy">
+            <h1>
+              ЗНИЖЕННЯ
+              <br />
+              ЦІН!
+            </h1>
+            <p className="promo-call">Дзвони та замовляй!</p>
+            <p className="promo-detail">
+              Колоті дрова з доставкою по Києву та області
+            </p>
+          </div>
         </div>
-        <div className="reference-mobile mx-auto max-w-[680px] lg:hidden">
-          <div className="reference-mobile-photo" aria-hidden="true" />
-          <div className="reference-mobile-poster">
-            <div className="reference-mobile-wood">Промокод</div>
-            <div className="reference-mobile-code">ДідІван2026</div>
-            <div className="reference-mobile-offer">
-              <div>
-                <p>Додаткова знижка</p>
-                <span>на всі види дров</span>
-              </div>
-              <Gift aria-hidden="true" />
-            </div>
-          </div>
-          <div className="reference-mobile-trust">
-            <div><Truck aria-hidden="true" /><span>Доставка<br />включена</span></div>
-            <div><Warehouse aria-hidden="true" /><span>Від 3<br />складометрів</span></div>
-            <div><ShieldCheck aria-hidden="true" /><span>Якісні<br />дрова</span></div>
-          </div>
+        <div className="promo-trust">
+          <span>
+            <Truck aria-hidden="true" />
+            Доставка включена
+          </span>
+          <span>
+            <Warehouse aria-hidden="true" />
+            Від 3 складометрів
+          </span>
+          <span>
+            <ShieldCheck aria-hidden="true" />
+            Якісні дрова
+          </span>
         </div>
       </section>
 
@@ -529,7 +529,7 @@ export default function Homepage() {
             <span className="h-px flex-1 bg-[#cda86c]" />
           </div>
 
-          <div className="mt-9 grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-9 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
             {WOODS.map((wood) => (
               <article
                 key={wood.id}
@@ -555,6 +555,31 @@ export default function Homepage() {
                   <p className="mt-3 text-sm font-bold leading-relaxed text-[#776b59]">
                     {wood.bestFor}
                   </p>
+                  <p className="mt-4 text-lg font-black text-[#9b3724]">
+                    Від {formatPrice(getUnitPrice(wood, 20))} грн / скл. м{' '}
+                    <span className="block text-sm font-semibold text-[#776b59]">
+                      при замовленні 20 скл. м
+                    </span>
+                  </p>
+                  <details className="mt-3 rounded-lg border border-[#d6c7aa] p-3">
+                    <summary className="cursor-pointer font-bold">
+                      Ціни для всіх об’ємів
+                    </summary>
+                    <dl className="mt-2 text-sm">
+                      {PRICE_ROWS.map((row) => (
+                        <div
+                          key={row.quantity}
+                          className="flex justify-between gap-2 border-t border-[#e6dcc9] py-2"
+                        >
+                          <dt>{row.label}</dt>
+                          <dd className="font-black">
+                            {formatPrice(wood.prices[row.quantity])} грн / скл.
+                            м
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </details>
                   <div className="mt-auto flex flex-col gap-3 pt-7">
                     <button
                       type="button"
@@ -602,7 +627,8 @@ export default function Homepage() {
                 Дрова у Діда Івана
               </p>
               <p className="text-base font-semibold text-white/65">
-                Береза · Вільха · Сосна · Тверді породи
+                Береза · Вільха · Сосна · Осика · Клен · Дуб · Ясен · Акація ·
+                Граб · Яблуня · Груша
               </p>
             </div>
           </div>
