@@ -162,7 +162,7 @@ const woodProducts: WoodProduct[] = [
     name: 'Граб',
     genitive: 'граба',
     description:
-      'Щільні дрова для тривалого горіння. Доплата за граб +100 грн/скл. м вже врахована.',
+      'Щільні дрова для тривалого горіння.',
     bestFor: 'Для тривалого опалення печі та котла.',
     ordinaryPrice: 5500,
     prices: Object.fromEntries(
