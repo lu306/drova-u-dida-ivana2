@@ -16,6 +16,7 @@ import {
   PHONE,
   PHONE_LABEL,
   PRICE_ROWS,
+  PRICE_QUANTITIES,
   WOODS,
   formatPrice,
   getUnitPrice,
@@ -224,12 +225,12 @@ export function OrderCalculator({
 }) {
   const wood = getWood(woodId);
   const unitPrice = getUnitPrice(wood, quantity);
-  const ordinaryTotal = wood.ordinaryPrice * quantity;
-  const total = unitPrice * quantity;
-  const saving = ordinaryTotal - total;
+  const referencePrice = wood.ordinaryPrice;
+
+  const saving = referencePrice - unitPrice;
 
   const setQuantity = (next: number) =>
-    onQuantityChange(Math.max(3, Math.min(20, next)));
+    onQuantityChange(Math.max(3, Math.min(25, next)));
 
   return (
     <div
@@ -240,7 +241,7 @@ export function OrderCalculator({
     >
       <div className="p-5 sm:p-8">
         <p className="step-label">Крок 1 · Оберіть дрова</p>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {WOODS.map((item) => (
             <Button
               key={item.id}
@@ -248,7 +249,7 @@ export function OrderCalculator({
               onClick={() => onWoodChange(item.id)}
               aria-pressed={woodId === item.id}
               className={cn(
-                'min-h-16 rounded-xl border-2 text-lg font-black',
+                'min-h-16 whitespace-normal rounded-xl border-2 text-base font-black',
                 woodId === item.id
                   ? 'border-primary bg-primary text-white hover:bg-primary/90 hover:text-white'
                   : 'border-[#d6c7aa] bg-white hover:bg-[#f5ead6]',
@@ -281,15 +282,15 @@ export function OrderCalculator({
             variant="outline"
             size="icon-lg"
             onClick={() => setQuantity(quantity + 1)}
-            disabled={quantity >= 20}
+            disabled={quantity >= 25}
             aria-label="Збільшити кількість"
             className="size-16 rounded-xl border-2 border-[#d6c7aa] bg-white"
           >
             <Plus className="size-7" />
           </Button>
         </div>
-        <div className="mt-3 grid grid-cols-7 gap-1.5">
-          {[3, 4, 5, 6, 8, 10, 12].map((value) => (
+        <div className="mt-3 grid grid-cols-4 gap-1.5">
+          {PRICE_QUANTITIES.map((value) => (
             <Button
               key={value}
               variant="outline"
@@ -320,19 +321,19 @@ export function OrderCalculator({
           </h3>
           <div className="mt-6 rounded-2xl bg-[#fff8eb]/80 p-5">
             <p className="text-base font-bold text-[#6d6556]">
-              За ціною 3 скл. м
+              Ціна за 1 скл. м при об’ємі 3 скл. м
             </p>
             <p className="text-2xl font-bold text-[#7a6f5b]">
-              <s>{formatPrice(ordinaryTotal)} грн</s>
+              <s>{formatPrice(referencePrice)} грн / скл. м</s>
             </p>
             <p className="mt-4 text-base font-black uppercase text-[#9b3724]">
               Ваша ціна
             </p>
             <p className="font-heading text-5xl font-black text-primary">
-              {formatPrice(total)} грн
+              {formatPrice(unitPrice)} грн / скл. м
             </p>
             <p className="mt-2 text-lg font-black text-[#9b3724]">
-              Ваша вигода: {formatPrice(saving)} грн
+              Економія: {formatPrice(saving)} грн / скл. м
             </p>
           </div>
           <p className="mt-4 flex items-center gap-2 text-lg font-black">

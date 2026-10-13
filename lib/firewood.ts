@@ -7,7 +7,9 @@ export type WoodId =
   | 'pine'
   | 'hardwood'
   | 'maple'
-  | 'hornbeam';
+  | 'hornbeam'
+  | 'fruit'
+  | 'aspen';
 
 export type WoodProduct = {
   id: WoodId;
@@ -94,11 +96,11 @@ const MAPLE_PRICES: Record<number, number> = {
   25: 4200,
 };
 
-export const WOODS: WoodProduct[] = [
+const woodProducts: WoodProduct[] = [
   {
     id: 'birch',
-    name: 'Береза / яблуня / груша',
-    genitive: 'берези / яблуні / груші',
+    name: 'Береза',
+    genitive: 'берези',
     description:
       'Щільні дрова з високою тепловіддачею. Горять довго й рівно, добре тримають жар.',
     bestFor: 'Добрий вибір для печі, каміна та твердопаливного котла.',
@@ -121,10 +123,10 @@ export const WOODS: WoodProduct[] = [
   },
   {
     id: 'pine',
-    name: 'Сосна / осика',
-    genitive: 'сосни / осики',
+    name: 'Сосна',
+    genitive: 'сосни',
     description:
-      'Легко розпалюється та швидко прогріває приміщення. Сосна та осика за однаковою ціною.',
+      'Легко розпалюється та швидко прогріває приміщення. Має приємний хвойний аромат.',
     bestFor: 'Зручна для розпалювання, печі та твердопаливного котла.',
     ordinaryPrice: 4500,
     prices: PINE_PRICES,
@@ -172,9 +174,46 @@ export const WOODS: WoodProduct[] = [
     image: '/firewood-hardwood-v1.png',
     imagePosition: '50% 50%',
   },
+  {
+    id: 'fruit',
+    name: 'Яблуня / груша',
+    genitive: 'яблуні / груші',
+    description:
+      'Колоті дрова з плодових порід. Дають рівне тепло та добре тримають жар.',
+    bestFor: 'Для печі, каміна та приготування їжі на вогні.',
+    ordinaryPrice: 4800,
+    prices: BIRCH_ALDER_PRICES,
+    image: '/firewood-birch-v1.png',
+    imagePosition: '50% 50%',
+  },
+  {
+    id: 'aspen',
+    name: 'Осика',
+    genitive: 'осики',
+    description: 'Колоті дрова з осики для домашнього опалення.',
+    bestFor: 'Для печі та твердопаливного котла.',
+    ordinaryPrice: 4500,
+    prices: PINE_PRICES,
+    image: '/firewood-alder-v1.png',
+    imagePosition: '50% 50%',
+  },
 ];
 
-export const PRICE_QUANTITIES = [5, 10, 15, 20] as const;
+const woodOrder: WoodId[] = [
+  'hardwood',
+  'hornbeam',
+  'maple',
+  'birch',
+  'alder',
+  'fruit',
+  'pine',
+  'aspen',
+];
+export const WOODS: WoodProduct[] = woodOrder.map((id) =>
+  woodProducts.find((wood) => wood.id === id)!,
+);
+
+export const PRICE_QUANTITIES = [3, 5, 7, 10, 12, 15, 20, 25] as const;
 
 export const PRICE_ROWS = PRICE_QUANTITIES.map((quantity) => ({
   label: `${quantity} скл. м`,

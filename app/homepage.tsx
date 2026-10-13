@@ -81,9 +81,9 @@ function SavingsCalculator({
   onQuantityChange: (quantity: number) => void;
 }) {
   const wood = getWood(woodId);
-  const ordinaryTotal = wood.ordinaryPrice * quantity;
-  const total = getUnitPrice(wood, quantity) * quantity;
-  const saving = ordinaryTotal - total;
+  const referencePrice = wood.ordinaryPrice;
+  const unitPrice = getUnitPrice(wood, quantity);
+  const saving = referencePrice - unitPrice;
 
   return (
     <section
@@ -98,7 +98,7 @@ function SavingsCalculator({
           <p className="mt-1 text-sm font-semibold text-white/75 sm:text-lg">
             Чим більше замовлення — тим менша ціна за складометр
           </p>
-          <div className="mx-auto mt-3 grid max-w-[760px] grid-cols-2 gap-2 sm:mt-4 sm:grid-cols-3 sm:gap-3">
+          <div className="mx-auto mt-3 grid max-w-[1000px] grid-cols-2 gap-2 sm:mt-4 sm:grid-cols-4 sm:gap-3">
             {WOODS.map((item) => (
               <button
                 key={item.id}
@@ -148,27 +148,37 @@ function SavingsCalculator({
             <div className="grid sm:grid-cols-[.8fr_1fr_1.15fr]">
               <div className="flex flex-col justify-center border-b border-[#d8c8aa] p-5 text-center sm:border-b-0 sm:border-r sm:p-7">
                 <p className="text-base font-bold text-[#6b665b]">
-                  За ціною 3 скл. м
+                  При замовленні 3 скл. м
                 </p>
                 <p className="mt-1 font-heading text-3xl font-black">
                   <s className="decoration-[#b84a2f] decoration-4">
-                    {formatPrice(ordinaryTotal)}
+                    {formatPrice(referencePrice)}
                   </s>{' '}
-                  <span className="text-lg">грн</span>
+                  <span className="mt-1 block text-base">грн / скл. м</span>
                 </p>
+              </div>
+
+              <div className="flex items-center justify-center p-4 text-center">
+                <div className="flex aspect-square w-full max-w-[180px] rotate-[-5deg] flex-col items-center justify-center rounded-full border-4 border-[#fff1d8] bg-[#b84a2f] px-3 text-white shadow-[0_5px_0_#873521,0_9px_18px_rgba(135,53,33,.18)]">
+                  <p className="text-sm font-black uppercase tracking-wide">
+                    Економія
+                  </p>
+                  <p className="mt-1 font-heading text-4xl font-black">
+                    {formatPrice(saving)}
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-[#fff1d8]">
+                    грн / скл. м
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-col items-center justify-center bg-[#f0b83d] p-5 text-center sm:p-7">
-                <p className="text-base font-black">Ваша економія</p>
-                <p className="mt-1 font-heading text-4xl font-black">
-                  {formatPrice(saving)} грн
+                <p className="text-base font-bold text-[#6b665b]">
+                  Ваша ціна за 1 скл. м
                 </p>
-              </div>
-
-              <div className="flex flex-col items-center justify-center p-5 text-center sm:p-7">
-                <p className="text-base font-bold text-[#6b665b]">Ваша сума</p>
                 <p className="mt-1 font-heading text-4xl font-black">
-                  {formatPrice(total)} <span className="text-lg">грн</span>
+                  {formatPrice(unitPrice)}{' '}
+                  <span className="mt-1 block text-base">грн / скл. м</span>
                 </p>
                 <a
                   href={`tel:${PHONE}`}
@@ -186,7 +196,7 @@ function SavingsCalculator({
 }
 
 export default function Homepage() {
-  const [woodId, setWoodId] = useState<WoodId>('birch');
+  const [woodId, setWoodId] = useState<WoodId>('hardwood');
   const [quantity, setQuantity] = useState(10);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -246,7 +256,7 @@ export default function Homepage() {
             const nextWood = WOODS.find((item) => item.id === wood);
             if (!nextWood || !quantities.includes(Number(nextQuantity))) {
               throw new Error(
-                'Оберіть породу та обсяг 5, 10, 15 або 20 складометрів',
+                'Оберіть породу та обсяг 3, 5, 7, 10, 12, 15, 20 або 25 складометрів',
               );
             }
             const count = Number(nextQuantity);
@@ -265,7 +275,7 @@ export default function Homepage() {
               quantity: count,
               unitPrice,
               total: unitPrice * count,
-              saving: (nextWood.ordinaryPrice - unitPrice) * count,
+              savingPerUnit: nextWood.ordinaryPrice - unitPrice,
               delivery: 0,
               nextStep: `Зателефонувати ${PHONE_LABEL}`,
             };
@@ -367,18 +377,11 @@ export default function Homepage() {
             className="col-start-2 col-end-5 row-start-2 grid grid-cols-[max-content_190px_1fr] items-center px-7 text-base font-black"
           >
             <div className="flex items-center gap-7">
-              <a href="#products" className="hover:text-[#b17300]">
-                Береза
-              </a>
-              <a href="#products" className="hover:text-[#b17300]">
-                Вільха
-              </a>
-              <a href="#products" className="hover:text-[#b17300]">
-                Сосна
-              </a>
-              <a href="#products" className="hover:text-[#b17300]">
-                Тверді породи
-              </a>
+              {['Тверді породи', 'Береза', 'Вільха', 'Сосна'].map((name) => (
+                <a key={name} href="#products" className="hover:text-[#b17300]">
+                  {name}
+                </a>
+              ))}
               <a href="#benefits" className="hover:text-[#b17300]">
                 Про нас
               </a>
@@ -438,11 +441,10 @@ export default function Homepage() {
             className="grid grid-cols-2 gap-px border-t border-[#d8c8aa] bg-[#d8c8aa] lg:hidden"
           >
             {[
+              ['Тверді породи', '#products'],
               ['Береза', '#products'],
               ['Вільха', '#products'],
               ['Сосна', '#products'],
-              ['Тверді породи', '#products'],
-              ['Клен / граб', '#products'],
               ['Розрахунок', '#calculator'],
               ['Про нас', '#benefits'],
               ['Контакти', '#contacts'],
@@ -464,14 +466,12 @@ export default function Homepage() {
         <div className="promo-inner">
           <div className="promo-copy">
             <h1>
-              ЗНИЖЕННЯ
+              Сухі колоті
               <br />
-              ЦІН!
+              дрова
             </h1>
-            <p className="promo-call">Дзвони та замовляй!</p>
-            <p className="promo-detail">
-              Колоті дрова з доставкою по Києву та області
-            </p>
+            <p className="promo-call">ЗНИЖЕННЯ ЦІН!</p>
+            <p className="promo-detail">Доставка по Києву та області</p>
           </div>
         </div>
         <div className="promo-trust">
@@ -489,13 +489,6 @@ export default function Homepage() {
           </span>
         </div>
       </section>
-
-      <SavingsCalculator
-        woodId={woodId}
-        quantity={quantity}
-        onWoodChange={setWoodId}
-        onQuantityChange={setQuantity}
-      />
 
       <section id="benefits" className="paper-texture px-4 pb-12 sm:px-6">
         <div className="mx-auto grid max-w-[1180px] grid-cols-3 gap-2 sm:gap-4">
@@ -529,7 +522,7 @@ export default function Homepage() {
             <span className="h-px flex-1 bg-[#cda86c]" />
           </div>
 
-          <div className="mt-9 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-9 grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
             {WOODS.map((wood) => (
               <article
                 key={wood.id}
@@ -601,6 +594,13 @@ export default function Homepage() {
           </div>
         </div>
       </section>
+
+      <SavingsCalculator
+        woodId={woodId}
+        quantity={quantity}
+        onWoodChange={setWoodId}
+        onQuantityChange={setQuantity}
+      />
 
       <section className="px-4 pb-14 sm:px-6 lg:pb-20">
         <div className="mx-auto grid max-w-[1280px] gap-3 rounded-2xl bg-[#183a28] p-5 text-white sm:grid-cols-2 lg:grid-cols-4 lg:p-7">
