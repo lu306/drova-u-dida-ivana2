@@ -160,15 +160,25 @@ function SavingsCalculator({
 
               <div className="flex items-center justify-center p-4 text-center">
                 <div className="flex aspect-square w-full max-w-[180px] rotate-[-5deg] flex-col items-center justify-center rounded-full border-4 border-[#fff1d8] bg-[#b84a2f] px-3 text-white shadow-[0_5px_0_#873521,0_9px_18px_rgba(135,53,33,.18)]">
-                  <p className="text-sm font-black uppercase tracking-wide">
-                    Економія
-                  </p>
-                  <p className="mt-1 font-heading text-4xl font-black">
-                    {formatPrice(saving)}
-                  </p>
-                  <p className="mt-1 text-sm font-bold text-[#fff1d8]">
-                    грн / скл. м
-                  </p>
+                  {quantity === 3 ? (
+                    <p className="font-heading text-2xl font-black uppercase leading-tight">
+                      Стандартна
+                      <br />
+                      ціна
+                    </p>
+                  ) : (
+                    <>
+                      <p className="text-sm font-black uppercase tracking-wide">
+                        Економія
+                      </p>
+                      <p className="mt-1 font-heading text-4xl font-black">
+                        {formatPrice(saving)}
+                      </p>
+                      <p className="mt-1 text-sm font-bold text-[#fff1d8]">
+                        грн / скл. м
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
 
