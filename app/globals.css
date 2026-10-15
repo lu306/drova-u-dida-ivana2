@@ -146,8 +146,8 @@
   background: #eee0c1;
 }
 .promo-inner {
-  max-width: 1280px;
-  min-height: 550px;
+  width: 100%;
+  min-height: clamp(550px, 43vw, 820px);
   margin: auto;
   background: url('/hero-grandfather-v3.png') center top / cover no-repeat;
   display: flex;
@@ -155,7 +155,8 @@
 }
 .promo-copy {
   width: 52%;
-  padding: 40px 48px;
+  padding: 40px max(32px, calc((100vw - 1184px) / 2));
+  padding-right: 24px;
 }
 .promo-label {
   font-weight: 900;
@@ -251,5 +252,61 @@
     flex-direction: column;
     gap: 5px;
     text-align: center;
+  }
+}
+
+.header-benefits > span {
+  white-space: nowrap;
+}
+.hero-mobile-benefits {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 24px;
+  padding: 14px 12px;
+  background: #fffaf0;
+  color: #615d54;
+  font-size: 14px;
+  font-weight: 700;
+}
+.hero-mobile-benefits:not(.hidden) {
+  display: flex;
+}
+.hero-mobile-benefits span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.hero-mobile-benefits svg {
+  width: 16px;
+  height: 16px;
+  color: #9b6a18;
+  flex-shrink: 0;
+}
+.hero-promotion p {
+  display: inline-block;
+  max-width: 100%;
+  padding: 12px 18px;
+  margin-bottom: 14px;
+  border: 2px solid #f0b83d;
+  border-radius: 14px;
+  background: #b84a2f;
+  color: #fffaf0;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 900;
+  line-height: 1.4;
+  box-shadow: 0 4px 0 #873521;
+}
+@media (min-width: 1024px) {
+  .hero-mobile-benefits:not(.hidden) {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .promo-copy {
+    padding: 24px 20px 30px;
+  }
+  .promo-inner {
+    background-size: cover;
   }
 }

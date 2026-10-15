@@ -29,6 +29,7 @@ import {
   type WoodId,
 } from '@/lib/firewood';
 import { cn } from '@/lib/utils';
+import HeroPromotion from './hero-promotion';
 
 const quantities: readonly number[] = PRICE_QUANTITIES;
 
@@ -322,7 +323,7 @@ export default function Homepage() {
             </p>
           </div>
 
-          <div className="flex items-center justify-center gap-6 px-5 text-sm font-bold text-[#615d54]">
+          <div className="header-benefits flex flex-col items-start justify-center gap-2 px-3 text-sm font-bold text-[#615d54]">
             <span>
               <Truck className="mr-2 inline size-4 text-[#9b6a18]" /> Доставка
               включена
@@ -475,6 +476,7 @@ export default function Homepage() {
       <section id="top" className="promo-hero">
         <div className="promo-inner">
           <div className="promo-copy">
+            <HeroPromotion />
             <h1>
               Сухі колоті
               <br />
@@ -483,6 +485,20 @@ export default function Homepage() {
             <p className="promo-call">ЗНИЖЕННЯ ЦІН!</p>
             <p className="promo-detail">Доставка по Києву та області</p>
           </div>
+        </div>
+        <div className="hero-mobile-benefits lg:hidden">
+          <span>
+            <Truck aria-hidden="true" />
+            Доставка включена
+          </span>
+          <span>
+            <Banknote aria-hidden="true" />
+            Оплата при отриманні
+          </span>
+          <span>
+            <ShieldCheck aria-hidden="true" />
+            Чесні ціни
+          </span>
         </div>
         <div className="promo-trust">
           <span>
