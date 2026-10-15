@@ -106,7 +106,7 @@ const woodProducts: WoodProduct[] = [
     bestFor: 'Добрий вибір для печі, каміна та твердопаливного котла.',
     ordinaryPrice: 4800,
     prices: BIRCH_ALDER_PRICES,
-    image: '/firewood-birch-v1.png',
+    image: '/firewood-birch-v3.png',
     imagePosition: '0% 50%',
   },
   {
@@ -118,7 +118,7 @@ const woodProducts: WoodProduct[] = [
     bestFor: 'Підходить для печі, каміна та лазні.',
     ordinaryPrice: 4800,
     prices: BIRCH_ALDER_PRICES,
-    image: '/firewood-alder-v1.png',
+    image: '/firewood-alder-v3.png',
     imagePosition: '50% 50%',
   },
   {
@@ -130,7 +130,7 @@ const woodProducts: WoodProduct[] = [
     bestFor: 'Зручна для розпалювання, печі та твердопаливного котла.',
     ordinaryPrice: 4500,
     prices: PINE_PRICES,
-    image: '/firewood-pine-v1.png',
+    image: '/firewood-pine-v3.png',
     imagePosition: '100% 50%',
   },
   {
@@ -143,7 +143,7 @@ const woodProducts: WoodProduct[] = [
       'Найкращий вибір для тривалого опалення печі та твердопаливного котла.',
     ordinaryPrice: 5400,
     prices: HARDWOOD_PRICES,
-    image: '/firewood-hardwood-v1.png',
+    image: '/firewood-hardwood-v3.png',
     imagePosition: '50% 50%',
   },
   {
@@ -154,7 +154,7 @@ const woodProducts: WoodProduct[] = [
     bestFor: 'Для печі, каміна та твердопаливного котла.',
     ordinaryPrice: 5200,
     prices: MAPLE_PRICES,
-    image: '/firewood-hardwood-v1.png',
+    image: '/firewood-maple-v3.png',
     imagePosition: '50% 50%',
   },
   {
@@ -171,7 +171,7 @@ const woodProducts: WoodProduct[] = [
         price + 100,
       ]),
     ),
-    image: '/firewood-hardwood-v1.png',
+    image: '/firewood-hornbeam-v3.png',
     imagePosition: '50% 50%',
   },
   {
@@ -183,7 +183,7 @@ const woodProducts: WoodProduct[] = [
     bestFor: 'Для печі, каміна та приготування їжі на вогні.',
     ordinaryPrice: 4800,
     prices: BIRCH_ALDER_PRICES,
-    image: '/firewood-birch-v1.png',
+    image: '/firewood-fruit-v3.png',
     imagePosition: '50% 50%',
   },
   {
@@ -194,7 +194,7 @@ const woodProducts: WoodProduct[] = [
     bestFor: 'Для печі та твердопаливного котла.',
     ordinaryPrice: 4500,
     prices: PINE_PRICES,
-    image: '/firewood-alder-v1.png',
+    image: '/firewood-aspen-v3.png',
     imagePosition: '50% 50%',
   },
 ];

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   BadgeCheck,
   Banknote,
@@ -210,6 +210,44 @@ export default function Homepage() {
   const [woodId, setWoodId] = useState<WoodId>('hardwood');
   const [quantity, setQuantity] = useState(10);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const panel = menuPanelRef.current!;
+    panel.querySelector<HTMLButtonElement>('button')?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+      if (event.key !== 'Tab') return;
+      const items = Array.from(
+        panel.querySelectorAll<HTMLElement>('button, a[href]'),
+      );
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const onResize = () => {
+      if (desktop.matches) setMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    desktop.addEventListener('change', onResize);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onKeyDown);
+      desktop.removeEventListener('change', onResize);
+      menuButtonRef.current?.focus({ preventScroll: true });
+    };
+  }, [mobileMenuOpen]);
 
   const chooseWood = (id: WoodId) => {
     setWoodId(id);
@@ -300,7 +338,12 @@ export default function Homepage() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f6efdf] pb-[76px] text-primary sm:pb-0">
-      <header className="relative z-10 border-b border-[#d8c8aa] bg-[#fffaf0]">
+      <header
+        className={cn(
+          'relative border-b border-[#d8c8aa] bg-[#fffaf0]',
+          mobileMenuOpen ? 'z-[60]' : 'z-10',
+        )}
+      >
         <div className="mx-auto hidden max-w-[1280px] grid-cols-[185px_245px_1fr_285px] grid-rows-[96px_60px] px-6 pt-2 lg:grid xl:grid-cols-[185px_255px_1fr_345px]">
           <a
             href="#top"
@@ -323,22 +366,7 @@ export default function Homepage() {
             </p>
           </div>
 
-          <div className="header-benefits flex flex-col items-start justify-center gap-2 px-3 text-sm font-bold text-[#615d54]">
-            <span>
-              <Truck className="mr-2 inline size-4 text-[#9b6a18]" /> Доставка
-              включена
-            </span>
-            <span>
-              <Banknote className="mr-2 inline size-4 text-[#9b6a18]" /> Оплата
-              при отриманні
-            </span>
-            <span>
-              <ShieldCheck className="mr-2 inline size-4 text-[#9b6a18]" />
-              Чесні ціни
-            </span>
-          </div>
-
-          <div className="flex flex-col justify-center px-3 text-right xl:px-5">
+          <div className="col-start-4 flex flex-col justify-center px-3 text-right xl:px-5">
             <div className="flex items-center justify-end gap-2 xl:gap-3">
               <a
                 href={`tel:${PHONE}`}
@@ -431,6 +459,7 @@ export default function Homepage() {
           </a>
           <button
             type="button"
+            ref={menuButtonRef}
             onClick={() => setMobileMenuOpen((open) => !open)}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-menu"
@@ -445,74 +474,88 @@ export default function Homepage() {
           </button>
         </div>
 
-        {mobileMenuOpen && (
-          <nav
-            id="mobile-menu"
-            aria-label="Мобільна навігація"
-            className="grid grid-cols-2 gap-px border-t border-[#d8c8aa] bg-[#d8c8aa] lg:hidden"
+        <div
+          className={cn(
+            'mobile-menu-layer lg:hidden',
+            mobileMenuOpen && 'is-open',
+          )}
+          inert={!mobileMenuOpen}
+          aria-hidden={!mobileMenuOpen}
+        >
+          <button
+            type="button"
+            className="mobile-menu-backdrop"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Закрити меню поза панеллю"
+            tabIndex={-1}
+          />
+          <div
+            ref={menuPanelRef}
+            className="mobile-menu-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Мобільне меню"
           >
-            {[
-              ['Тверді породи', '#products'],
-              ['Береза', '#products'],
-              ['Вільха', '#products'],
-              ['Сосна', '#products'],
-              ['Розрахунок', '#calculator'],
-              ['Про нас', '#benefits'],
-              ['Контакти', '#contacts'],
-            ].map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
+            <div className="mobile-menu-heading">
+              <div className="flex items-center gap-3">
+                <img
+                  src="/logo.png"
+                  alt=""
+                  className="size-14 shrink-0 object-contain"
+                />
+                <p className="font-heading text-xl font-black leading-tight">
+                  Дрова
+                  <br />у Діда Івана
+                </p>
+              </div>
+              <button
+                type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex min-h-14 items-center justify-center bg-[#fffaf0] px-4 text-base font-black"
+                aria-label="Закрити меню"
+                className="flex size-12 shrink-0 items-center justify-center rounded-lg border border-[#d8c8aa] text-primary"
               >
-                {label}
-              </a>
-            ))}
-          </nav>
-        )}
+                <X className="size-7" />
+              </button>
+            </div>
+            <nav
+              id="mobile-menu"
+              aria-label="Мобільна навігація"
+              className="mt-5 flex flex-col"
+            >
+              {[
+                ['Тверді породи', '#products'],
+                ['Береза', '#products'],
+                ['Вільха', '#products'],
+                ['Сосна', '#products'],
+                ['Розрахунок', '#calculator'],
+                ['Про нас', '#benefits'],
+                ['Контакти', '#contacts'],
+              ].map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-menu-link"
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </div>
       </header>
 
       <section id="top" className="promo-hero">
         <div className="promo-inner">
           <div className="promo-copy">
-            <HeroPromotion />
             <h1>
               Сухі колоті
               <br />
               дрова
             </h1>
-            <p className="promo-call">ЗНИЖЕННЯ ЦІН!</p>
+            <HeroPromotion />
             <p className="promo-detail">Доставка по Києву та області</p>
           </div>
-        </div>
-        <div className="hero-mobile-benefits lg:hidden">
-          <span>
-            <Truck aria-hidden="true" />
-            Доставка включена
-          </span>
-          <span>
-            <Banknote aria-hidden="true" />
-            Оплата при отриманні
-          </span>
-          <span>
-            <ShieldCheck aria-hidden="true" />
-            Чесні ціни
-          </span>
-        </div>
-        <div className="promo-trust">
-          <span>
-            <Truck aria-hidden="true" />
-            Доставка включена
-          </span>
-          <span>
-            <Warehouse aria-hidden="true" />
-            Від 3 складометрів
-          </span>
-          <span>
-            <ShieldCheck aria-hidden="true" />
-            Якісні дрова
-          </span>
         </div>
       </section>
 

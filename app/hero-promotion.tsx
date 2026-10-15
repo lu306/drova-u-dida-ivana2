@@ -37,7 +37,7 @@ export default function HeroPromotion() {
   }, []);
   return (
     <div className="hero-promotion" role="status" aria-live="polite">
-      {text && <p>{text}</p>}
+      {text && <p className="promo-call">{text}</p>}
     </div>
   );
 }

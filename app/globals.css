@@ -283,20 +283,6 @@
   color: #9b6a18;
   flex-shrink: 0;
 }
-.hero-promotion p {
-  display: inline-block;
-  max-width: 100%;
-  padding: 12px 18px;
-  margin-bottom: 14px;
-  border: 2px solid #f0b83d;
-  border-radius: 14px;
-  background: #b84a2f;
-  color: #fffaf0;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  font-weight: 900;
-  line-height: 1.4;
-  box-shadow: 0 4px 0 #873521;
-}
 @media (min-width: 1024px) {
   .hero-mobile-benefits:not(.hidden) {
     display: none;
@@ -308,5 +294,84 @@
   }
   .promo-inner {
     background-size: cover;
+  }
+}
+
+.hero-promotion .promo-call {
+  white-space: nowrap;
+  font-size: clamp(0.75rem, 2.5vw, 2rem);
+}
+@media (max-width: 767px) {
+  .hero-promotion .promo-call {
+    font-size: clamp(0.7rem, 4.8vw, 1.65rem);
+  }
+}
+
+.mobile-menu-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 250ms;
+}
+.mobile-menu-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 41, 28, 0.4);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+.mobile-menu-panel {
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  width: min(360px, 88vw);
+  padding: 20px 24px;
+  padding-top: max(20px, env(safe-area-inset-top));
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fffaf0;
+  box-shadow: -12px 0 36px rgba(16, 41, 28, 0.18);
+  transform: translateX(100%);
+  transition: transform 250ms ease;
+}
+.mobile-menu-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mobile-menu-link {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 14px 0;
+  border-bottom: 1px solid #d8c8aa;
+  font-size: 18px;
+  font-weight: 800;
+  color: #183a28;
+  transition: color 150ms;
+}
+.mobile-menu-link:hover,
+.mobile-menu-link:focus-visible {
+  color: #a33e27;
+}
+.mobile-menu-layer.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+.mobile-menu-layer.is-open .mobile-menu-backdrop {
+  opacity: 1;
+}
+.mobile-menu-layer.is-open .mobile-menu-panel {
+  transform: translateX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-layer,
+  .mobile-menu-backdrop,
+  .mobile-menu-panel {
+    transition: none;
   }
 }
