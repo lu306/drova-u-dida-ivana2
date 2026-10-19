@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-export function promotionText(now: Date): string | null {
+export function promotionText(now: Date): string {
   const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Europe/Kyiv',
     year: 'numeric',
@@ -10,15 +10,21 @@ export function promotionText(now: Date): string | null {
     day: '2-digit',
   }).formatToParts(now);
   const part = (type: string) =>
-    parts.find((item) => item.type === type)!.value;
-  const date = `${part('year')}-${part('month')}-${part('day')}`;
-  if (date >= '2026-10-15' && date <= '2026-10-18')
-    return '🔥 Акція — ціни знижено до 18 жовтня!';
-  if (date >= '2026-10-19' && date <= '2026-10-25')
-    return '🔥 Акція — ціни знижено до 25 жовтня!';
-  return null;
+    Number(parts.find((item) => item.type === type)!.value);
+  // Work with Kyiv calendar dates in UTC to keep three-day periods stable
+  // across daylight-saving changes. The first period is 19–21 October 2026.
+  const dayMs = 86_400_000;
+  const anchor = Date.UTC(2026, 9, 19);
+  const today = Date.UTC(part('year'), part('month') - 1, part('day'));
+  const period = Math.floor((today - anchor) / (3 * dayMs));
+  const end = new Date(anchor + (period * 3 + 2) * dayMs);
+  const deadline = new Intl.DateTimeFormat('uk-UA', {
+    timeZone: 'UTC',
+    day: 'numeric',
+    month: 'long',
+  }).format(end);
+  return `🔥 Акція — ціни знижено до ${deadline}!`;
 }
-
 export default function HeroPromotion() {
   // Static HTML and the first client render agree. Only the live client clock
   // selects a period, so cached HTML never contains an expired offer.

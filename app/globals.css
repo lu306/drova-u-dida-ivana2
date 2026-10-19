@@ -155,7 +155,7 @@
 }
 .promo-copy {
   width: 52%;
-  padding: 40px max(32px, calc((100vw - 1184px) / 2));
+  padding: 40px 24px;
   padding-right: 24px;
 }
 .promo-label {
@@ -298,12 +298,19 @@
 }
 
 .hero-promotion .promo-call {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.5em 1.2em;
+  color: #fff;
+  background: #b4392d;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 50%, 100% 100%, 0 100%, 12px 50%);
   white-space: nowrap;
-  font-size: clamp(0.75rem, 2.5vw, 2rem);
+  font-size: clamp(0.75rem, 2vw, 2rem);
+  line-height: 1.5;
 }
 @media (max-width: 767px) {
   .hero-promotion .promo-call {
-    font-size: clamp(0.7rem, 4.8vw, 1.65rem);
+    font-size: clamp(0.7rem, 4vw, 1.65rem);
   }
 }
 

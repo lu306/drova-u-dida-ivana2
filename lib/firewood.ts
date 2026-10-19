@@ -154,7 +154,7 @@ const woodProducts: WoodProduct[] = [
     bestFor: 'Для печі, каміна та твердопаливного котла.',
     ordinaryPrice: 5200,
     prices: MAPLE_PRICES,
-    image: '/firewood-maple-v3.png',
+    image: '/firewood-maple-v4.png',
     imagePosition: '50% 50%',
   },
   {
@@ -171,7 +171,7 @@ const woodProducts: WoodProduct[] = [
         price + 100,
       ]),
     ),
-    image: '/firewood-hornbeam-v3.png',
+    image: '/firewood-hornbeam-v4.png',
     imagePosition: '50% 50%',
   },
   {

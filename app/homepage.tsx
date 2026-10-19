@@ -559,12 +559,12 @@ export default function Homepage() {
         </div>
       </section>
 
-      <section id="benefits" className="paper-texture px-4 pb-12 sm:px-6">
+      <section id="benefits" className="paper-texture px-4 sm:px-6">
         <div className="mx-auto grid max-w-[1180px] grid-cols-3 gap-2 sm:gap-4">
           {benefits.map(({ icon: Icon, title, text }) => (
             <div
               key={title}
-              className="flex flex-col items-center gap-2 py-4 text-center sm:flex-row sm:gap-3 sm:text-left"
+              className="flex flex-col items-center gap-2 py-3 text-center sm:flex-row sm:gap-3 sm:text-left"
             >
               <Icon className="size-8 shrink-0 text-[#9b6a18]" />
               <div>
