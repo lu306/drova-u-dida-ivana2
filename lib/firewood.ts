@@ -23,77 +23,77 @@ export type WoodProduct = {
   imagePosition: string;
 };
 
-// Колоті дрова: колонка STOP, прайс 07.10.2026. Ціна за 1 скл. м.
+// Колоті дрова: колонка БАЗА, прайс 27.10.2026. Ціна за 1 скл. м.
 const BIRCH_ALDER_PRICES: Record<number, number> = {
-  3: 4800,
-  4: 4400,
-  5: 4200,
-  6: 3800,
-  7: 3700,
-  8: 3700,
-  9: 3600,
-  10: 3500,
-  11: 3500,
-  12: 3500,
-  13: 3500,
-  14: 3500,
-  15: 3500,
-  20: 3400,
-  25: 3400,
-};
-
-const PINE_PRICES: Record<number, number> = {
-  3: 4500,
-  4: 4100,
-  5: 3800,
-  6: 3700,
+  3: 4200,
+  4: 4000,
+  5: 3900,
+  6: 3500,
   7: 3500,
   8: 3500,
   9: 3400,
-  10: 3300,
-  11: 3300,
-  12: 3300,
+  10: 3400,
+  11: 3400,
+  12: 3400,
   13: 3300,
   14: 3300,
   15: 3300,
   20: 3300,
-  25: 3200,
+  25: 3300,
+};
+
+const PINE_PRICES: Record<number, number> = {
+  3: 3900,
+  4: 3600,
+  5: 3500,
+  6: 3400,
+  7: 3300,
+  8: 3200,
+  9: 3200,
+  10: 3200,
+  11: 3100,
+  12: 3100,
+  13: 3100,
+  14: 3100,
+  15: 3100,
+  20: 3100,
+  25: 3100,
 };
 
 const HARDWOOD_PRICES: Record<number, number> = {
-  3: 5400,
-  4: 5100,
-  5: 5000,
-  6: 4800,
-  7: 4700,
-  8: 4700,
-  9: 4600,
-  10: 4500,
-  11: 4500,
-  12: 4500,
-  13: 4500,
-  14: 4400,
-  15: 4400,
-  20: 4400,
-  25: 4400,
-};
-
-const MAPLE_PRICES: Record<number, number> = {
-  3: 5200,
-  4: 4900,
-  5: 4800,
-  6: 4600,
+  3: 4900,
+  4: 4700,
+  5: 4700,
+  6: 4500,
   7: 4500,
   8: 4500,
   9: 4400,
-  10: 4300,
-  11: 4300,
-  12: 4300,
+  10: 4400,
+  11: 4400,
+  12: 4400,
   13: 4300,
-  14: 4200,
-  15: 4200,
-  20: 4200,
-  25: 4200,
+  14: 4300,
+  15: 4300,
+  20: 4300,
+  25: 4300,
+};
+
+const MAPLE_PRICES: Record<number, number> = {
+  3: 4700,
+  4: 4500,
+  5: 4500,
+  6: 4300,
+  7: 4300,
+  8: 4300,
+  9: 4200,
+  10: 4200,
+  11: 4200,
+  12: 4200,
+  13: 4100,
+  14: 4100,
+  15: 4100,
+  20: 4100,
+  25: 4100,
 };
 
 const woodProducts: WoodProduct[] = [
@@ -104,9 +104,9 @@ const woodProducts: WoodProduct[] = [
     description:
       'Щільні дрова з високою тепловіддачею. Горять довго й рівно, добре тримають жар.',
     bestFor: 'Добрий вибір для печі, каміна та твердопаливного котла.',
-    ordinaryPrice: 4800,
+    ordinaryPrice: BIRCH_ALDER_PRICES[3],
     prices: BIRCH_ALDER_PRICES,
-    image: '/firewood-birch-v3.png',
+    image: '/firewood-birch-v3.webp',
     imagePosition: '0% 50%',
   },
   {
@@ -116,9 +116,9 @@ const woodProducts: WoodProduct[] = [
     description:
       'Швидко розпалюється, дає м’яке рівне тепло та утворює небагато диму й сажі.',
     bestFor: 'Підходить для печі, каміна та лазні.',
-    ordinaryPrice: 4800,
+    ordinaryPrice: BIRCH_ALDER_PRICES[3],
     prices: BIRCH_ALDER_PRICES,
-    image: '/firewood-alder-v3.png',
+    image: '/firewood-alder-v3.webp',
     imagePosition: '50% 50%',
   },
   {
@@ -128,9 +128,9 @@ const woodProducts: WoodProduct[] = [
     description:
       'Легко розпалюється та швидко прогріває приміщення. Має приємний хвойний аромат.',
     bestFor: 'Зручна для розпалювання, печі та твердопаливного котла.',
-    ordinaryPrice: 4500,
+    ordinaryPrice: PINE_PRICES[3],
     prices: PINE_PRICES,
-    image: '/firewood-pine-v3.png',
+    image: '/firewood-pine-v3.webp',
     imagePosition: '100% 50%',
   },
   {
@@ -141,9 +141,9 @@ const woodProducts: WoodProduct[] = [
       'Дуб, ясен та акація — щільні дрова з високою тепловіддачею. Довго горять і добре тримають жар.',
     bestFor:
       'Найкращий вибір для тривалого опалення печі та твердопаливного котла.',
-    ordinaryPrice: 5400,
+    ordinaryPrice: HARDWOOD_PRICES[3],
     prices: HARDWOOD_PRICES,
-    image: '/firewood-hardwood-v3.png',
+    image: '/firewood-hardwood-v3.webp',
     imagePosition: '50% 50%',
   },
   {
@@ -152,9 +152,9 @@ const woodProducts: WoodProduct[] = [
     genitive: 'клена',
     description: 'Колоті дрова з клена. Рівне тепло для домашнього опалення.',
     bestFor: 'Для печі, каміна та твердопаливного котла.',
-    ordinaryPrice: 5200,
+    ordinaryPrice: MAPLE_PRICES[3],
     prices: MAPLE_PRICES,
-    image: '/firewood-maple-v4.png',
+    image: '/firewood-maple-v4.webp',
     imagePosition: '50% 50%',
   },
   {
@@ -164,14 +164,9 @@ const woodProducts: WoodProduct[] = [
     description:
       'Щільні дрова для тривалого горіння.',
     bestFor: 'Для тривалого опалення печі та котла.',
-    ordinaryPrice: 5500,
-    prices: Object.fromEntries(
-      Object.entries(HARDWOOD_PRICES).map(([quantity, price]) => [
-        quantity,
-        price + 100,
-      ]),
-    ),
-    image: '/firewood-hornbeam-v4.png',
+    ordinaryPrice: HARDWOOD_PRICES[3],
+    prices: HARDWOOD_PRICES,
+    image: '/firewood-hornbeam-v4.webp',
     imagePosition: '50% 50%',
   },
   {
@@ -181,9 +176,9 @@ const woodProducts: WoodProduct[] = [
     description:
       'Колоті дрова з плодових порід. Дають рівне тепло та добре тримають жар.',
     bestFor: 'Для печі, каміна та приготування їжі на вогні.',
-    ordinaryPrice: 4800,
+    ordinaryPrice: BIRCH_ALDER_PRICES[3],
     prices: BIRCH_ALDER_PRICES,
-    image: '/firewood-fruit-v3.png',
+    image: '/firewood-fruit-v3.webp',
     imagePosition: '50% 50%',
   },
   {
@@ -192,9 +187,9 @@ const woodProducts: WoodProduct[] = [
     genitive: 'осики',
     description: 'Колоті дрова з осики для домашнього опалення.',
     bestFor: 'Для печі та твердопаливного котла.',
-    ordinaryPrice: 4500,
+    ordinaryPrice: PINE_PRICES[3],
     prices: PINE_PRICES,
-    image: '/firewood-aspen-v3.png',
+    image: '/firewood-aspen-v3.webp',
     imagePosition: '50% 50%',
   },
 ];
@@ -209,9 +204,18 @@ const woodOrder: WoodId[] = [
   'pine',
   'aspen',
 ];
-export const WOODS: WoodProduct[] = woodOrder.map((id) =>
-  woodProducts.find((wood) => wood.id === id)!,
-);
+// Узгоджена ціна сайту: БАЗА +100 грн/скл. м для всіх порід і обсягів.
+const SITE_MARKUP = 100;
+export const WOODS: WoodProduct[] = woodOrder.map((id) => {
+  const wood = woodProducts.find((item) => item.id === id)!;
+  return {
+    ...wood,
+    ordinaryPrice: wood.ordinaryPrice + SITE_MARKUP,
+    prices: Object.fromEntries(
+      Object.entries(wood.prices).map(([quantity, price]) => [quantity, price + SITE_MARKUP]),
+    ),
+  };
+});
 
 export const PRICE_QUANTITIES = [3, 5, 7, 10, 12, 15, 20, 25] as const;
 

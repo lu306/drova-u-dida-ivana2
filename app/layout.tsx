@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Roboto_Condensed, Source_Sans_3 } from 'next/font/google';
+import { Lora, Source_Sans_3 } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
@@ -7,7 +7,7 @@ const bodyFont = Source_Sans_3({
   variable: '--font-body',
   subsets: ['cyrillic', 'latin'],
 });
-const headingFont = Roboto_Condensed({
+const headingFont = Lora({
   variable: '--font-display',
   subsets: ['cyrillic', 'latin'],
 });
@@ -15,11 +15,11 @@ const headingFont = Roboto_Condensed({
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ??
-      'https://drova-u-dida-ivana.adept-trout-3642.chatgpt.site',
+      'https://did-ivan-drova.com',
   ),
-  title: 'Колоті дрова з доставкою — Дрова у Діда Івана',
+  title: 'Купити дрова у Києві з доставкою | Дрова у Діда Івана',
   description:
-    'Колоті дрова по Києву та області: береза, вільха, сосна, дуб, граб і ясен. Доставка у вартості, ціна нижча при більшому замовленні.',
+    'Колоті дрова з доставкою по Києву та Київській області. Дуб, граб, ясен, береза, вільха та сосна. Замовлення від 3 складометрів.',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -28,16 +28,20 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
   openGraph: {
-    title: 'Колоті дрова з доставкою по Києву та області',
+    type: 'website',
+    locale: 'uk_UA',
+    url: 'https://did-ivan-drova.com/',
+    siteName: 'Дрова у Діда Івана',
+    title: 'Купити дрова у Києві з доставкою | Дрова у Діда Івана',
     description:
-      'Береза, вільха, сосна та тверді породи. Чим більше замовляєте — тим дешевше.',
+      'Колоті дрова з доставкою по Києву та Київській області. Замовлення від 3 складометрів.',
     images: [{ url: '/og.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Колоті дрова з доставкою по Києву та області',
+    title: 'Купити дрова у Києві з доставкою | Дрова у Діда Івана',
     description:
-      'Береза, вільха, сосна та тверді породи. Чим більше замовляєте — тим дешевше.',
+      'Колоті дрова з доставкою по Києву та Київській області. Замовлення від 3 складометрів.',
     images: ['/og.png'],
   },
 };
@@ -48,6 +52,7 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <head>
+        <link rel="preload" as="image" href="/hero-grandfather-v3.webp" fetchPriority="high" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18426173367"
           strategy="afterInteractive"

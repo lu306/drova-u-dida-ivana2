@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-const siteUrl = (process.env.SITE_URL || 'http://localhost:3000').replace(
+const siteUrl = (process.env.SITE_URL || 'https://did-ivan-drova.com').replace(
   /\/$/,
   '',
 );

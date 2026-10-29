@@ -30,6 +30,7 @@ import {
 } from '@/lib/firewood';
 import { cn } from '@/lib/utils';
 import HeroPromotion from './hero-promotion';
+import { landingFaq, productTitles } from '@/lib/landing-content';
 
 const quantities: readonly number[] = PRICE_QUANTITIES;
 
@@ -93,9 +94,9 @@ function SavingsCalculator({
     >
       <div className="overflow-hidden rounded-[1.35rem] border-4 border-[#3c5b3d] bg-[#29462f] p-3 text-white shadow-[0_18px_45px_rgba(45,65,43,.2)] sm:rounded-[1.7rem] sm:p-7">
         <div className="text-center">
-          <p className="whitespace-nowrap font-heading text-[1.12rem] font-black uppercase sm:text-3xl">
+          <h2 className="whitespace-nowrap font-heading text-[1.12rem] font-black uppercase sm:text-3xl">
             Розрахуйте свою економію
-          </p>
+          </h2>
           <p className="mt-1 text-sm font-semibold text-white/75 sm:text-lg">
             Чим більше замовлення — тим менша ціна за складометр
           </p>
@@ -350,7 +351,7 @@ export default function Homepage() {
             className="row-span-2 flex items-center justify-center pr-4"
           >
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="Дрова у Діда Івана"
               className="size-[154px] object-contain"
             />
@@ -443,7 +444,7 @@ export default function Homepage() {
         <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-4 py-3 lg:hidden">
           <a href="#top" className="flex min-w-0 items-center gap-3">
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="Дрова у Діда Івана"
               className="size-16 shrink-0 object-contain"
             />
@@ -499,7 +500,7 @@ export default function Homepage() {
             <div className="mobile-menu-heading">
               <div className="flex items-center gap-3">
                 <img
-                  src="/logo.png"
+                  src="/logo.webp"
                   alt=""
                   className="size-14 shrink-0 object-contain"
                 />
@@ -547,19 +548,16 @@ export default function Homepage() {
 
       <section id="top" className="promo-hero">
         <div className="promo-inner">
+          <div className="hero-photo-frame"><img className="hero-photo" src="/hero-grandfather-v3.webp" alt="Дід Іван із колотими дровами" width={1536} height={1024} fetchPriority="high" /></div>
+          <img className="pine-decor pine-top" src="/pine-ornament.webp" alt="" width={1536} height={1024} aria-hidden="true" />
           <div className="promo-copy">
+            <p className="hero-eyebrow">Натуральні дрова<br />з доставкою</p>
             <h1>
-              Сухі колоті
-              <br />
-              дрова
+              Колоті дрова з доставкою по Києву та Київській області
             </h1>
-            <HeroPromotion />
-            <p className="promo-detail">Доставка по Києву та області</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="benefits" className="paper-texture px-4 sm:px-6">
+            <p className="promo-summary">Від 3 складометрів. Доставка до вашого двору.</p>
+            <div className="promotion-decorated"><HeroPromotion /><img className="pine-decor pine-promo" src="/pine-ornament.webp" alt="" width={1536} height={1024} aria-hidden="true" /></div>
+<section id="benefits" className="paper-texture px-4 sm:px-6">
         <div className="mx-auto grid max-w-[1180px] grid-cols-3 gap-2 sm:gap-4">
           {benefits.map(({ icon: Icon, title, text }) => (
             <div
@@ -577,16 +575,20 @@ export default function Homepage() {
           ))}
         </div>
       </section>
+          </div>
+        </div>
+      </section>
 
       <section
         id="products"
         className="paper-texture px-4 py-12 sm:px-6 lg:py-16"
       >
         <div className="mx-auto max-w-[1280px]">
+          <p className="catalog-eyebrow">Наші дрова</p>
           <div className="flex items-center justify-center gap-4 text-center">
             <span className="h-px flex-1 bg-[#cda86c]" />
             <h2 className="font-heading text-[clamp(2.4rem,5vw,4.2rem)] font-black uppercase leading-none">
-              Оберіть свої дрова
+              Популярні породи дров
             </h2>
             <span className="h-px flex-1 bg-[#cda86c]" />
           </div>
@@ -595,38 +597,33 @@ export default function Homepage() {
             {WOODS.map((wood) => (
               <article
                 key={wood.id}
-                className="grid overflow-hidden rounded-2xl border-2 border-[#d6c7aa] bg-[#fffaf0] shadow-[0_10px_25px_rgba(59,43,23,.08)] sm:grid-cols-[.9fr_1.1fr] lg:grid-cols-1"
+                className="grid overflow-hidden rounded-2xl border-2 border-[#d6c7aa] bg-[#fffaf0] shadow-[0_10px_25px_rgba(59,43,23,.08)] grid-rows-[auto_1fr] sm:grid-cols-[.9fr_1.1fr] sm:grid-rows-1 lg:grid-cols-1 lg:grid-rows-[auto_1fr]"
               >
-                <div
-                  role="img"
-                  aria-label={`Колоті дрова: ${wood.name}`}
-                  className="product-photo min-h-52"
-                  style={{
-                    backgroundImage: `linear-gradient(180deg, rgba(10, 28, 18, 0) 58%, rgba(10, 28, 18, 0.16)), url('${wood.image}')`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                  }}
-                />
+                <div className="product-photo relative aspect-[4/3] w-full self-start overflow-hidden">
+                  <img src={wood.image} alt={`Колоті дрова з ${wood.genitive} з доставкою по Києву та області`} width={1448} height={1086} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" />
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-58% to-[#0a1c1229]" />
+                </div>
                 <div className="flex flex-col p-5">
                   <h3 className="font-heading text-3xl font-black uppercase">
-                    {wood.name}
+                    {productTitles[wood.id]}
                   </h3>
+                  <p className="mt-4 text-lg font-black text-[#9b3724]">
+                    <span className="product-price-number">Від {formatPrice(getUnitPrice(wood, 20))}</span> <span className="product-price-unit">грн / скл. м</span>{' '}
+                    <span className="block text-sm font-semibold text-[#776b59]">
+                      при замовленні 20 скл. м
+                    </span>
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-[#5f625b]">Доставка включена · від 3 до 25 скл. м</p>
+                  <details className="mt-3 rounded-lg border border-[#d6c7aa] p-3">
+                    <summary className="cursor-pointer font-bold">
+                      Ціни для всіх об’ємів
+                    </summary>
                   <p className="mt-2 text-base font-semibold text-[#5f625b]">
                     {wood.description}
                   </p>
                   <p className="mt-3 text-sm font-bold leading-relaxed text-[#776b59]">
                     {wood.bestFor}
                   </p>
-                  <p className="mt-4 text-lg font-black text-[#9b3724]">
-                    Від {formatPrice(getUnitPrice(wood, 20))} грн / скл. м{' '}
-                    <span className="block text-sm font-semibold text-[#776b59]">
-                      при замовленні 20 скл. м
-                    </span>
-                  </p>
-                  <details className="mt-3 rounded-lg border border-[#d6c7aa] p-3">
-                    <summary className="cursor-pointer font-bold">
-                      Ціни для всіх об’ємів
-                    </summary>
                     <dl className="mt-2 text-sm">
                       {PRICE_ROWS.map((row) => (
                         <div
@@ -642,7 +639,7 @@ export default function Homepage() {
                       ))}
                     </dl>
                   </details>
-                  <div className="mt-auto flex flex-col gap-3 pt-7">
+                  <div className="product-actions mt-auto flex flex-col gap-3 pt-7">
                     <button
                       type="button"
                       onClick={() => chooseWood(wood.id)}
@@ -661,6 +658,27 @@ export default function Homepage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <div className="catalog-contact">
+        <img className="pine-decor pine-bottom-left" src="/pine-ornament.webp" alt="" width={1536} height={1024} aria-hidden="true" />
+        <a href={`tel:${PHONE}`}><Phone size={22} /> Подзвонити <span>{PHONE_LABEL}</span></a>
+        <img className="pine-decor pine-bottom-right" src="/pine-ornament.webp" alt="" width={1536} height={1024} aria-hidden="true" />
+      </div>
+
+      <section aria-labelledby="buy-firewood-title" className="paper-texture px-4 pt-8 sm:px-6">
+        <div className="mx-auto max-w-[1180px]">
+          <h2 id="buy-firewood-title" className="font-heading text-2xl font-black sm:text-3xl">Купити дрова у Києві та області</h2>
+          <p className="mt-3 max-w-[960px] text-base leading-relaxed text-[#5f625b]">Пропонуємо колоті дрова з доставкою до вашого двору по Києву та Київській області — від 3 складометрів. Обирайте тверді, листяні або хвойні породи для печі, каміна чи котла. Рахуємо об’єм у складометрах складених дров, а ціну за складометр і загальну суму показуємо до замовлення.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="delivery-title" className="paper-texture px-4 pb-8 sm:px-6">
+        <div className="mx-auto max-w-[1180px]">
+          <h2 id="delivery-title" className="font-heading text-2xl font-black sm:text-3xl">Дрова з доставкою по Києву та Київській області</h2>
+          <p className="mt-3 text-base leading-relaxed text-[#5f625b]">Замовляйте колоті дрова довжиною 30–40 см від 3 складометрів. Оберіть породу та потрібний об’єм у каталозі, розрахуйте вартість нижче й зателефонуйте для погодження адреси та дати доставки. Щоб замовити дрова у Києві або області, достатньо узгодити ці деталі з менеджером.</p>
+          <p lang="ru" className="mt-3 text-sm leading-relaxed text-[#67635b]">Принимаем заказы на украинском и русском. Купить дрова в Киеве и Киевской области можно по телефону: подберём породу, объём и согласуем дрова с доставкой.</p>
         </div>
       </section>
 
@@ -684,13 +702,27 @@ export default function Homepage() {
         </div>
       </section>
 
+      <section aria-labelledby="faq-title" className="paper-texture px-4 py-10 sm:px-6">
+        <div className="mx-auto max-w-[1180px]">
+          <h2 id="faq-title" className="font-heading text-3xl font-black">Питання про замовлення дров</h2>
+          <div className="mt-5 grid gap-3">
+            {landingFaq.map(({ question, answer }) => (
+              <details key={question} className="rounded-lg border border-[#d6c7aa] bg-[#fffaf0] p-4">
+                <summary className="min-h-6 cursor-pointer font-bold">{question}</summary>
+                <p className="mt-3 max-w-[960px] leading-relaxed text-[#5f625b]">{answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section
         id="contacts"
         className="bg-[#10291c] px-4 py-10 text-white sm:px-6"
       >
         <div className="mx-auto flex max-w-[1180px] flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="" className="size-20 object-contain" />
+            <img src="/logo.webp" alt="" className="size-20 object-contain" />
             <div>
               <p className="font-heading text-2xl font-black">
                 Дрова у Діда Івана
@@ -718,7 +750,7 @@ export default function Homepage() {
         </div>
       </section>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 bg-gradient-to-t from-[#10291c] via-[#10291c]/95 to-transparent px-4 pb-[max(.75rem,env(safe-area-inset-bottom))] pt-4 sm:hidden">
+      <div className="floating-call fixed inset-x-0 bottom-0 z-50 bg-gradient-to-t from-[#10291c] via-[#10291c]/95 to-transparent px-4 pb-[max(.75rem,env(safe-area-inset-bottom))] pt-4 sm:hidden">
         <a
           href={`tel:${PHONE}`}
           aria-label={`Подзвонити: ${PHONE_LABEL}`}
