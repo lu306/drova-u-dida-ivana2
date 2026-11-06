@@ -6,9 +6,7 @@ export type WoodId =
   | 'alder'
   | 'pine'
   | 'hardwood'
-  | 'maple'
   | 'hornbeam'
-  | 'fruit'
   | 'aspen';
 
 export type WoodProduct = {
@@ -78,24 +76,6 @@ const HARDWOOD_PRICES: Record<number, number> = {
   25: 4300,
 };
 
-const MAPLE_PRICES: Record<number, number> = {
-  3: 4700,
-  4: 4500,
-  5: 4500,
-  6: 4300,
-  7: 4300,
-  8: 4300,
-  9: 4200,
-  10: 4200,
-  11: 4200,
-  12: 4200,
-  13: 4100,
-  14: 4100,
-  15: 4100,
-  20: 4100,
-  25: 4100,
-};
-
 const woodProducts: WoodProduct[] = [
   {
     id: 'birch',
@@ -135,26 +115,15 @@ const woodProducts: WoodProduct[] = [
   },
   {
     id: 'hardwood',
-    name: 'Тверді породи',
-    genitive: 'твердих порід',
+    name: 'Дуб',
+    genitive: 'дуба',
     description:
-      'Дуб, ясен та акація — щільні дрова з високою тепловіддачею. Довго горять і добре тримають жар.',
+      'Колоті дубові дрова з високою тепловіддачею. Довго горять і добре тримають жар.',
     bestFor:
       'Найкращий вибір для тривалого опалення печі та твердопаливного котла.',
     ordinaryPrice: HARDWOOD_PRICES[3],
     prices: HARDWOOD_PRICES,
     image: '/firewood-hardwood-v3.webp',
-    imagePosition: '50% 50%',
-  },
-  {
-    id: 'maple',
-    name: 'Клен',
-    genitive: 'клена',
-    description: 'Колоті дрова з клена. Рівне тепло для домашнього опалення.',
-    bestFor: 'Для печі, каміна та твердопаливного котла.',
-    ordinaryPrice: MAPLE_PRICES[3],
-    prices: MAPLE_PRICES,
-    image: '/firewood-maple-v4.webp',
     imagePosition: '50% 50%',
   },
   {
@@ -167,18 +136,6 @@ const woodProducts: WoodProduct[] = [
     ordinaryPrice: HARDWOOD_PRICES[3],
     prices: HARDWOOD_PRICES,
     image: '/firewood-hornbeam-v4.webp',
-    imagePosition: '50% 50%',
-  },
-  {
-    id: 'fruit',
-    name: 'Яблуня / груша',
-    genitive: 'яблуні / груші',
-    description:
-      'Колоті дрова з плодових порід. Дають рівне тепло та добре тримають жар.',
-    bestFor: 'Для печі, каміна та приготування їжі на вогні.',
-    ordinaryPrice: BIRCH_ALDER_PRICES[3],
-    prices: BIRCH_ALDER_PRICES,
-    image: '/firewood-fruit-v3.webp',
     imagePosition: '50% 50%',
   },
   {
@@ -197,10 +154,8 @@ const woodProducts: WoodProduct[] = [
 const woodOrder: WoodId[] = [
   'hardwood',
   'hornbeam',
-  'maple',
   'birch',
   'alder',
-  'fruit',
   'pine',
   'aspen',
 ];

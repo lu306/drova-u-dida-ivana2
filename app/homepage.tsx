@@ -417,7 +417,7 @@ export default function Homepage() {
             className="col-start-2 col-end-5 row-start-2 grid grid-cols-[max-content_190px_1fr] items-center px-7 text-base font-black"
           >
             <div className="flex items-center gap-7">
-              {['Тверді породи', 'Береза', 'Вільха', 'Сосна'].map((name) => (
+              {['Дуб', 'Береза', 'Вільха', 'Сосна'].map((name) => (
                 <a key={name} href="#products" className="hover:text-[#b17300]">
                   {name}
                 </a>
@@ -524,7 +524,7 @@ export default function Homepage() {
               className="mt-5 flex flex-col"
             >
               {[
-                ['Тверді породи', '#products'],
+                ['Дуб', '#products'],
                 ['Береза', '#products'],
                 ['Вільха', '#products'],
                 ['Сосна', '#products'],
@@ -608,9 +608,9 @@ export default function Homepage() {
                     {productTitles[wood.id]}
                   </h3>
                   <p className="mt-4 text-lg font-black text-[#9b3724]">
-                    <span className="product-price-number">Від {formatPrice(getUnitPrice(wood, 20))}</span> <span className="product-price-unit">грн / скл. м</span>{' '}
+                    <span className="product-price-number">Від {formatPrice(getUnitPrice(wood, 15))}</span> <span className="product-price-unit">грн / скл. м</span>{' '}
                     <span className="block text-sm font-semibold text-[#776b59]">
-                      при замовленні 20 скл. м
+                      при замовленні від 15 складометрів
                     </span>
                   </p>
                   <p className="mt-2 text-sm font-semibold text-[#5f625b]">Доставка включена · від 3 до 25 скл. м</p>
@@ -728,8 +728,7 @@ export default function Homepage() {
                 Дрова у Діда Івана
               </p>
               <p className="text-base font-semibold text-white/65">
-                Береза · Вільха · Сосна · Осика · Клен · Дуб · Ясен · Акація ·
-                Граб · Яблуня · Груша
+                Дуб · Граб · Береза · Вільха · Сосна · Осика
               </p>
             </div>
           </div>
