@@ -25,8 +25,6 @@ import {
   PRICE_ROWS,
   formatPrice,
   getUnitPrice,
-  getWood,
-  type WoodId,
 } from '@/lib/firewood';
 import { cn } from '@/lib/utils';
 import HeroPromotion from './hero-promotion';
@@ -71,145 +69,7 @@ const trustItems = [
   },
 ];
 
-function SavingsCalculator({
-  woodId,
-  quantity,
-  onWoodChange,
-  onQuantityChange,
-}: {
-  woodId: WoodId;
-  quantity: number;
-  onWoodChange: (id: WoodId) => void;
-  onQuantityChange: (quantity: number) => void;
-}) {
-  const wood = getWood(woodId);
-  const referencePrice = wood.ordinaryPrice;
-  const unitPrice = getUnitPrice(wood, quantity);
-  const saving = referencePrice - unitPrice;
-
-  return (
-    <section
-      id="calculator"
-      className="relative z-30 mx-auto max-w-[1280px] px-3 pt-4 pb-8 sm:px-6 sm:pt-6"
-    >
-      <div className="overflow-hidden rounded-[1.35rem] border-4 border-[#3c5b3d] bg-[#29462f] p-3 text-white shadow-[0_18px_45px_rgba(45,65,43,.2)] sm:rounded-[1.7rem] sm:p-7">
-        <div className="text-center">
-          <h2 className="whitespace-nowrap font-heading text-[1.12rem] font-black uppercase sm:text-3xl">
-            Розрахуйте свою економію
-          </h2>
-          <p className="mt-1 text-sm font-semibold text-white/75 sm:text-lg">
-            Чим більше замовлення — тим менша ціна за складометр
-          </p>
-          <div className="mx-auto mt-3 grid max-w-[1000px] grid-cols-2 gap-2 sm:mt-4 sm:grid-cols-4 sm:gap-3">
-            {WOODS.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => onWoodChange(item.id)}
-                aria-pressed={woodId === item.id}
-                className={cn(
-                  'min-h-11 rounded-lg border-2 px-2 text-sm font-black transition sm:min-h-12 sm:text-base',
-                  woodId === item.id
-                    ? 'border-[#e2a72c] bg-[#f0b83d] text-[#193726] shadow-[inset_0_0_0_1px_rgba(255,255,255,.25)]'
-                    : 'border-[#d9cfb9] bg-[#fffaf0] text-primary hover:border-[#e2a72c]',
-                )}
-              >
-                {item.name}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-4 grid gap-3 sm:mt-6 sm:gap-4 lg:grid-cols-[.8fr_1.2fr]">
-          <div className="rounded-2xl bg-[#fffaf0] p-4 text-primary sm:p-5">
-            <p className="text-base font-black">Оберіть об’єм</p>
-            <div className="mt-3 grid grid-cols-4 gap-2">
-              {quantities.map((value) => (
-                <button
-                  key={value}
-                  type="button"
-                  onClick={() => onQuantityChange(value)}
-                  aria-pressed={quantity === value}
-                  className={cn(
-                    'min-h-11 whitespace-nowrap rounded-lg border-2 px-1 text-[.78rem] font-black transition sm:min-h-14 sm:px-2 sm:text-lg',
-                    quantity === value
-                      ? 'border-[#d99600] bg-[#f0b83d]'
-                      : 'border-[#d8c8aa] bg-white hover:border-[#d99600]',
-                  )}
-                >
-                  {value} скл. м
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="overflow-hidden rounded-2xl bg-[#fffaf0] text-primary">
-            <p className="border-b border-[#d8c8aa] px-5 py-3 text-center text-base font-bold text-[#5f635d]">
-              {quantity} скл. м · {wood.name} · доставка включена
-            </p>
-            <div className="grid sm:grid-cols-[.8fr_1fr_1.15fr]">
-              <div className="flex flex-col justify-center border-b border-[#d8c8aa] p-5 text-center sm:border-b-0 sm:border-r sm:p-7">
-                <p className="text-base font-bold text-[#6b665b]">
-                  При замовленні 3 скл. м
-                </p>
-                <p className="mt-1 font-heading text-3xl font-black">
-                  <s className="decoration-[#b84a2f] decoration-4">
-                    {formatPrice(referencePrice)}
-                  </s>{' '}
-                  <span className="mt-1 block text-base">грн / скл. м</span>
-                </p>
-              </div>
-
-              <div className="flex items-center justify-center p-4 text-center">
-                <div className="flex aspect-square w-full max-w-[180px] rotate-[-5deg] flex-col items-center justify-center rounded-full border-4 border-[#fff1d8] bg-[#b84a2f] px-3 text-white shadow-[0_5px_0_#873521,0_9px_18px_rgba(135,53,33,.18)]">
-                  {quantity === 3 ? (
-                    <p className="font-heading text-2xl font-black uppercase leading-tight">
-                      Стандартна
-                      <br />
-                      ціна
-                    </p>
-                  ) : (
-                    <>
-                      <p className="text-sm font-black uppercase tracking-wide">
-                        Економія
-                      </p>
-                      <p className="mt-1 font-heading text-4xl font-black">
-                        {formatPrice(saving)}
-                      </p>
-                      <p className="mt-1 text-sm font-bold text-[#fff1d8]">
-                        грн / скл. м
-                      </p>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center justify-center bg-[#f0b83d] p-5 text-center sm:p-7">
-                <p className="text-base font-bold text-[#6b665b]">
-                  Ваша ціна за 1 скл. м
-                </p>
-                <p className="mt-1 font-heading text-4xl font-black">
-                  {formatPrice(unitPrice)}{' '}
-                  <span className="mt-1 block text-base">грн / скл. м</span>
-                </p>
-                <a
-                  href={`tel:${PHONE}`}
-                  className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 text-base font-black text-white"
-                >
-                  <Phone className="size-5" /> Подзвонити
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function Homepage() {
-  const [woodId, setWoodId] = useState<WoodId>('hardwood');
-  const [quantity, setQuantity] = useState(10);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
@@ -250,17 +110,6 @@ export default function Homepage() {
     };
   }, [mobileMenuOpen]);
 
-  const chooseWood = (id: WoodId) => {
-    setWoodId(id);
-    window.setTimeout(
-      () =>
-        document
-          .getElementById('calculator')
-          ?.scrollIntoView({ behavior: 'smooth' }),
-      0,
-    );
-  };
-
   useEffect(() => {
     const modelContext = (
       document as Document & {
@@ -281,7 +130,7 @@ export default function Homepage() {
           name: 'stage_firewood_quote',
           title: 'Підготувати розрахунок дров',
           description:
-            'Обирає породу та обсяг, оновлює видимий розрахунок перед дзвінком.',
+            'Відкриває ціни обраної породи та обсягу в каталозі перед дзвінком.',
           inputSchema: {
             type: 'object',
             properties: {
@@ -306,20 +155,14 @@ export default function Homepage() {
             const nextWood = WOODS.find((item) => item.id === wood);
             if (!nextWood || !quantities.includes(Number(nextQuantity))) {
               throw new Error(
-                'Оберіть породу та обсяг 3, 5, 7, 10, 12, 15, 20 або 25 складометрів',
+                'Оберіть породу та обсяг 2, 3, 5, 7, 10, 12, 15, 20 або 25 складометрів',
               );
             }
             const count = Number(nextQuantity);
             const unitPrice = getUnitPrice(nextWood, count);
-            setWoodId(nextWood.id);
-            setQuantity(count);
-            window.setTimeout(
-              () =>
-                document
-                  .getElementById('calculator')
-                  ?.scrollIntoView({ behavior: 'smooth' }),
-              0,
-            );
+            const prices = document.getElementById(`prices-${nextWood.id}`) as HTMLDetailsElement | null;
+            if (prices) prices.open = true;
+            document.getElementById(`price-${nextWood.id}-${count}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return {
               wood: nextWood.name,
               quantity: count,
@@ -417,7 +260,7 @@ export default function Homepage() {
             className="col-start-2 col-end-5 row-start-2 grid grid-cols-[max-content_190px_1fr] items-center px-7 text-base font-black"
           >
             <div className="flex items-center gap-7">
-              {['Тверді породи', 'Береза', 'Вільха', 'Сосна'].map((name) => (
+              {['Дубові дрова', 'Береза', 'Вільха', 'Сосна'].map((name) => (
                 <a key={name} href="#products" className="hover:text-[#b17300]">
                   {name}
                 </a>
@@ -524,11 +367,11 @@ export default function Homepage() {
               className="mt-5 flex flex-col"
             >
               {[
-                ['Тверді породи', '#products'],
+                ['Дубові дрова', '#products'],
                 ['Береза', '#products'],
                 ['Вільха', '#products'],
                 ['Сосна', '#products'],
-                ['Розрахунок', '#calculator'],
+                ['Ціни', '#products'],
                 ['Про нас', '#benefits'],
                 ['Контакти', '#contacts'],
               ].map(([label, href]) => (
@@ -555,7 +398,7 @@ export default function Homepage() {
             <h1>
               Колоті дрова з доставкою по Києву та Київській області
             </h1>
-            <p className="promo-summary">Від 3 складометрів. Доставка до вашого двору.</p>
+            <p className="promo-summary">Від 2 складометрів. Доставка до вашого двору.</p>
             <div className="promotion-decorated"><HeroPromotion /><img className="pine-decor pine-promo" src="/pine-ornament.webp" alt="" width={1536} height={1024} aria-hidden="true" /></div>
 <section id="benefits" className="paper-texture px-4 sm:px-6">
         <div className="mx-auto grid max-w-[1180px] grid-cols-3 gap-2 sm:gap-4">
@@ -584,6 +427,7 @@ export default function Homepage() {
         className="paper-texture px-4 py-12 sm:px-6 lg:py-16"
       >
         <div className="mx-auto max-w-[1280px]">
+          <span id="calculator" aria-hidden="true" className="block" />
           <p className="catalog-eyebrow">Наші дрова</p>
           <div className="flex items-center justify-center gap-4 text-center">
             <span className="h-px flex-1 bg-[#cda86c]" />
@@ -608,45 +452,31 @@ export default function Homepage() {
                     {productTitles[wood.id]}
                   </h3>
                   <p className="mt-4 text-lg font-black text-[#9b3724]">
-                    <span className="product-price-number">Від {formatPrice(getUnitPrice(wood, 20))}</span> <span className="product-price-unit">грн / скл. м</span>{' '}
-                    <span className="block text-sm font-semibold text-[#776b59]">
-                      при замовленні 20 скл. м
-                    </span>
+                    <span className="product-price-number">{new Set(Object.values(wood.prices)).size > 1 ? 'Від ' : ''}{formatPrice(getUnitPrice(wood, 20))}</span> <span className="product-price-unit">грн / скл. м</span>{' '}
+                    {new Set(Object.values(wood.prices)).size > 1 && (
+                      <span className="block text-sm font-semibold text-[#776b59]">при замовленні 20 скл. м</span>
+                    )}
                   </p>
-                  <p className="mt-2 text-sm font-semibold text-[#5f625b]">Доставка включена · від 3 до 25 скл. м</p>
-                  <details className="mt-3 rounded-lg border border-[#d6c7aa] p-3">
-                    <summary className="cursor-pointer font-bold">
-                      Ціни для всіх об’ємів
-                    </summary>
-                  <p className="mt-2 text-base font-semibold text-[#5f625b]">
-                    {wood.description}
-                  </p>
-                  <p className="mt-3 text-sm font-bold leading-relaxed text-[#776b59]">
-                    {wood.bestFor}
-                  </p>
-                    <dl className="mt-2 text-sm">
-                      {PRICE_ROWS.map((row) => (
-                        <div
-                          key={row.quantity}
-                          className="flex justify-between gap-2 border-t border-[#e6dcc9] py-2"
-                        >
-                          <dt>{row.label}</dt>
-                          <dd className="font-black">
-                            {formatPrice(wood.prices[row.quantity])} грн / скл.
-                            м
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </details>
+                  <p className="mt-2 text-sm font-semibold text-[#5f625b]">Доставка включена · від 2 до 25 скл. м</p>
                   <div className="product-actions mt-auto flex flex-col gap-3 pt-7">
-                    <button
-                      type="button"
-                      onClick={() => chooseWood(wood.id)}
-                      className="min-h-13 flex-1 rounded-lg bg-primary px-4 text-base font-black text-white"
-                    >
-                      Розрахувати вигоду
-                    </button>
+                    <details id={`prices-${wood.id}`} className="product-prices">
+                      <summary aria-label={`Ціни для всіх об’ємів — ${wood.name}`}>
+                        Ціни для всіх об’ємів
+                      </summary>
+                      <div className="product-prices-list">
+                        <p className="mb-2 text-xs font-semibold text-[#776b59]">Повна вартість із доставкою</p>
+                        <dl className="text-sm">
+                          {PRICE_ROWS.map((row) => (
+                            <div id={`price-${wood.id}-${row.quantity}`} key={row.quantity} className="flex justify-between gap-2 border-t border-[#e6dcc9] py-2">
+                              <dt>{row.label}</dt>
+                              <dd className="font-black">{formatPrice(getUnitPrice(wood, row.quantity) * row.quantity)} грн</dd>
+                            </div>
+                          ))}
+                        </dl>
+                        <p className="mt-3 text-sm text-[#5f625b]">{wood.description}</p>
+                        <p className="mt-2 text-sm text-[#776b59]">{wood.bestFor}</p>
+                      </div>
+                    </details>
                     <a
                       href={`tel:${PHONE}`}
                       className="flex min-h-13 flex-1 items-center justify-center gap-2 rounded-lg bg-[#e2a72c] px-4 text-base font-black text-primary"
@@ -670,24 +500,18 @@ export default function Homepage() {
       <section aria-labelledby="buy-firewood-title" className="paper-texture px-4 pt-8 sm:px-6">
         <div className="mx-auto max-w-[1180px]">
           <h2 id="buy-firewood-title" className="font-heading text-2xl font-black sm:text-3xl">Купити дрова у Києві та області</h2>
-          <p className="mt-3 max-w-[960px] text-base leading-relaxed text-[#5f625b]">Пропонуємо колоті дрова з доставкою до вашого двору по Києву та Київській області — від 3 складометрів. Обирайте тверді, листяні або хвойні породи для печі, каміна чи котла. Рахуємо об’єм у складометрах складених дров, а ціну за складометр і загальну суму показуємо до замовлення.</p>
+          <p className="mt-3 max-w-[960px] text-base leading-relaxed text-[#5f625b]">Пропонуємо колоті дрова з доставкою до вашого двору по Києву та Київській області — від 2 складометрів. Обирайте тверді, листяні або хвойні породи для печі, каміна чи котла. Рахуємо об’єм у складометрах складених дров, а ціну за складометр і загальну суму показуємо до замовлення.</p>
         </div>
       </section>
 
       <section aria-labelledby="delivery-title" className="paper-texture px-4 pb-8 sm:px-6">
         <div className="mx-auto max-w-[1180px]">
           <h2 id="delivery-title" className="font-heading text-2xl font-black sm:text-3xl">Дрова з доставкою по Києву та Київській області</h2>
-          <p className="mt-3 text-base leading-relaxed text-[#5f625b]">Замовляйте колоті дрова довжиною 30–40 см від 3 складометрів. Оберіть породу та потрібний об’єм у каталозі, розрахуйте вартість нижче й зателефонуйте для погодження адреси та дати доставки. Щоб замовити дрова у Києві або області, достатньо узгодити ці деталі з менеджером.</p>
+          <p className="mt-3 text-base leading-relaxed text-[#5f625b]">Замовляйте колоті дрова довжиною 30–40 см від 2 складометрів. Оберіть породу та потрібний об’єм у каталозі, перегляньте повну вартість у картці товару й зателефонуйте для погодження адреси та дати доставки. Щоб замовити дрова у Києві або області, достатньо узгодити ці деталі з менеджером.</p>
           <p lang="ru" className="mt-3 text-sm leading-relaxed text-[#67635b]">Принимаем заказы на украинском и русском. Купить дрова в Киеве и Киевской области можно по телефону: подберём породу, объём и согласуем дрова с доставкой.</p>
         </div>
       </section>
 
-      <SavingsCalculator
-        woodId={woodId}
-        quantity={quantity}
-        onWoodChange={setWoodId}
-        onQuantityChange={setQuantity}
-      />
 
       <section className="px-4 pb-14 sm:px-6 lg:pb-20">
         <div className="mx-auto grid max-w-[1280px] gap-3 rounded-2xl bg-[#183a28] p-5 text-white sm:grid-cols-2 lg:grid-cols-4 lg:p-7">

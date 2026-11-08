@@ -11,7 +11,7 @@ const structuredData = {
     { '@type': 'Store', '@id': `${site}/#store`, name: 'Дрова у Діда Івана', url: `${site}/`, telephone: PHONE, logo: `${site}/logo.webp`, image: `${site}/logo.webp`, areaServed: ['Київ', 'Київська область'] },
     ...WOODS.map((wood) => ({
       '@type': 'Product', '@id': `${site}/#product-${wood.id}`,
-      name: wood.id === 'hardwood' ? 'Колоті дрова твердих порід: дуб, ясен, акація' : productTitles[wood.id],
+      name: productTitles[wood.id],
       description: `${wood.description} ${wood.bestFor}`,
       image: `${site}${wood.image}`,
       offers: PRICE_QUANTITIES.map((quantity) => ({

@@ -542,3 +542,12 @@ section[aria-labelledby] h2 { font-weight: 600; letter-spacing: -.025em; }
  .promo-copy h1 { min-height: 174px; }
  .hero-photo-frame .hero-photo { right: -35%; }
 }
+/* Catalogue price disclosure takes the former calculator button position. */
+#products article details.product-prices { padding: 0; border: 0; border-radius: 8px; background: transparent; }
+.product-prices > summary { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 12px 10px; border-radius: 8px; background: var(--primary); color: #fffaf1; font-family: var(--font-display); font-size: 14px; font-weight: 700; line-height: 1.4; text-align: center; cursor: pointer; list-style: none; }
+.product-prices > summary::-webkit-details-marker { display: none; }
+.product-prices > summary::after { content: '⌄'; font-family: var(--font-body); transition: transform .2s ease; }
+.product-prices[open] > summary::after { transform: rotate(180deg); }
+.product-prices > summary:hover { filter: brightness(1.12); }
+.product-prices > summary:focus-visible { outline: 3px solid #d99600; outline-offset: 3px; }
+.product-prices-list { padding: 14px 4px 4px; }

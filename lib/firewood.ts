@@ -135,10 +135,10 @@ const woodProducts: WoodProduct[] = [
   },
   {
     id: 'hardwood',
-    name: 'Тверді породи',
-    genitive: 'твердих порід',
+    name: 'Дубові дрова',
+    genitive: 'дуба',
     description:
-      'Дуб, ясен та акація — щільні дрова з високою тепловіддачею. Довго горять і добре тримають жар.',
+      'Дубові колоті дрова з високою тепловіддачею. Довго горять і добре тримають жар.',
     bestFor:
       'Найкращий вибір для тривалого опалення печі та твердопаливного котла.',
     ordinaryPrice: HARDWOOD_PRICES[3],
@@ -197,27 +197,37 @@ const woodProducts: WoodProduct[] = [
 const woodOrder: WoodId[] = [
   'hardwood',
   'hornbeam',
-  'maple',
   'birch',
   'alder',
-  'fruit',
   'pine',
   'aspen',
 ];
-// Узгоджена ціна сайту: БАЗА +100 грн/скл. м для всіх порід і обсягів.
+// Оновлені фіксовані ціни за 1 скл. м на всіх обсягах (08.11.2026).
+const FIXED_UNIT_PRICES: Partial<Record<WoodId, number>> = {
+  hardwood: 4150,
+  birch: 3200,
+  alder: 3200,
+  pine: 3000,
+  aspen: 3000,
+};
+// Для решти порід збережено попередні тарифи БАЗА +100 грн/скл. м.
 const SITE_MARKUP = 100;
 export const WOODS: WoodProduct[] = woodOrder.map((id) => {
   const wood = woodProducts.find((item) => item.id === id)!;
+  const fixedPrice = FIXED_UNIT_PRICES[id];
   return {
     ...wood,
-    ordinaryPrice: wood.ordinaryPrice + SITE_MARKUP,
-    prices: Object.fromEntries(
-      Object.entries(wood.prices).map(([quantity, price]) => [quantity, price + SITE_MARKUP]),
-    ),
+    ordinaryPrice: fixedPrice ?? wood.ordinaryPrice + SITE_MARKUP,
+    prices: {
+      2: fixedPrice ?? wood.prices[3] + SITE_MARKUP,
+      ...Object.fromEntries(
+        Object.entries(wood.prices).map(([quantity, price]) => [quantity, fixedPrice ?? price + SITE_MARKUP]),
+      ),
+    },
   };
 });
 
-export const PRICE_QUANTITIES = [3, 5, 7, 10, 12, 15, 20, 25] as const;
+export const PRICE_QUANTITIES = [2, 3, 5, 7, 10, 12, 15, 20, 25] as const;
 
 export const PRICE_ROWS = PRICE_QUANTITIES.map((quantity) => ({
   label: `${quantity} скл. м`,
