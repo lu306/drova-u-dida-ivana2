@@ -162,6 +162,7 @@ const woodOrder: WoodId[] = [
 // Оновлені фіксовані ціни за 1 скл. м на всіх обсягах (08.11.2026).
 const FIXED_UNIT_PRICES: Partial<Record<WoodId, number>> = {
   hardwood: 4150,
+  hornbeam: 4250,
   birch: 3200,
   alder: 3200,
   pine: 3000,
