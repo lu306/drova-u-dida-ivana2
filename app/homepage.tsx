@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   BadgeCheck,
+  ChevronDown,
   Banknote,
   MessageCircle,
   Menu,
@@ -428,11 +429,10 @@ export default function Homepage() {
       >
         <div className="mx-auto max-w-[1280px]">
           <span id="calculator" aria-hidden="true" className="block" />
-          <p className="catalog-eyebrow">Наші дрова</p>
           <div className="flex items-center justify-center gap-4 text-center">
             <span className="h-px flex-1 bg-[#cda86c]" />
             <h2 className="font-heading text-[clamp(2.4rem,5vw,4.2rem)] font-black uppercase leading-none">
-              Популярні породи дров
+              Наш асортимент
             </h2>
             <span className="h-px flex-1 bg-[#cda86c]" />
           </div>
@@ -461,7 +461,8 @@ export default function Homepage() {
                   <div className="product-actions mt-auto flex flex-col gap-3 pt-7">
                     <details id={`prices-${wood.id}`} className="product-prices">
                       <summary aria-label={`Ціни для всіх об’ємів — ${wood.name}`}>
-                        Ціни для всіх об’ємів
+                        <span>Ціни для всіх об’ємів</span>
+                        <ChevronDown className="product-prices-chevron" aria-hidden="true" />
                       </summary>
                       <div className="product-prices-list">
                         <p className="mb-2 text-xs font-semibold text-[#776b59]">Повна вартість із доставкою</p>
