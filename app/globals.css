@@ -551,3 +551,6 @@ section[aria-labelledby] h2 { font-weight: 600; letter-spacing: -.025em; }
 .product-prices > summary:hover { filter: brightness(1.12); }
 .product-prices > summary:focus-visible { outline: 3px solid #d99600; outline-offset: 3px; }
 .product-prices-list { padding: 14px 4px 4px; }
+/* Keep the corner ornament clear of the headline after removing the eyebrow. */
+.promo-hero .pine-top { left: -125px; }
+@media (max-width: 767px) { .promo-hero .pine-top { left: -72px; } }
