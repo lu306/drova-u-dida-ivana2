@@ -1,8 +1,8 @@
 import { WOODS, getUnitPrice, formatPrice, type WoodId } from './firewood';
 
 export const productTitles: Record<WoodId, string> = {
-  hardwood: 'Дубові дрова', hornbeam: 'Грабові дрова', maple: 'Кленові дрова',
-  birch: 'Березові дрова', alder: 'Вільхові дрова', fruit: 'Дрова з яблуні та груші',
+  hardwood: 'Дубові дрова', hornbeam: 'Грабові дрова',
+  birch: 'Березові дрова', alder: 'Вільхові дрова',
   pine: 'Соснові дрова', aspen: 'Осикові дрова',
 };
 const pine = WOODS.find((wood) => wood.id === 'pine')!;

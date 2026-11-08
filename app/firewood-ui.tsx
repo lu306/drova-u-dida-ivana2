@@ -102,10 +102,10 @@ export function ProductCard({
         </p>
         <div className="mt-2 rounded-2xl bg-[#f5e6cd] p-4">
           <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-[#9b3724]">
-            <Tags className="size-5" /> Від 20 складометрів
+            <Tags className="size-5" /> При замовленні від 15 складометрів
           </p>
           <p className="mt-1 font-heading text-4xl font-black text-[#9b3724] sm:text-5xl">
-            {formatPrice(getUnitPrice(wood, 20))}{' '}
+            {formatPrice(getUnitPrice(wood, 15))}{' '}
             <span className="text-xl">грн / скл. м</span>
           </p>
         </div>
@@ -175,12 +175,12 @@ export function PriceTable({ className }: { className?: string }) {
                 key={row.label}
                 className={cn(
                   'border-t border-[#ddd0b7]',
-                  row.quantity === 20 && 'bg-[#e6f0e7] text-primary',
+                  row.quantity === 15 && 'bg-[#e6f0e7] text-primary',
                 )}
               >
                 <th scope="row" className="px-5 py-5 text-xl font-black">
                   {row.label}
-                  {row.quantity === 20 && (
+                  {row.quantity === 15 && (
                     <span className="ml-2 rounded-full bg-[#b84a2f] px-2.5 py-1 text-xs text-white">
                       Найвигідніше
                     </span>

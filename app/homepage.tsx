@@ -452,9 +452,9 @@ export default function Homepage() {
                     {productTitles[wood.id]}
                   </h3>
                   <p className="mt-4 text-lg font-black text-[#9b3724]">
-                    <span className="product-price-number">{new Set(Object.values(wood.prices)).size > 1 ? 'Від ' : ''}{formatPrice(getUnitPrice(wood, 20))}</span> <span className="product-price-unit">грн / скл. м</span>{' '}
+                    <span className="product-price-number">{new Set(Object.values(wood.prices)).size > 1 ? 'Від ' : ''}{formatPrice(getUnitPrice(wood, 15))}</span> <span className="product-price-unit">грн / скл. м</span>{' '}
                     {new Set(Object.values(wood.prices)).size > 1 && (
-                      <span className="block text-sm font-semibold text-[#776b59]">при замовленні 20 скл. м</span>
+                      <span className="block text-sm font-semibold text-[#776b59]">при замовленні від 15 складометрів</span>
                     )}
                   </p>
                   <p className="mt-2 text-sm font-semibold text-[#5f625b]">Доставка включена · від 2 до 25 скл. м</p>
@@ -552,8 +552,7 @@ export default function Homepage() {
                 Дрова у Діда Івана
               </p>
               <p className="text-base font-semibold text-white/65">
-                Береза · Вільха · Сосна · Осика · Клен · Дуб · Ясен · Акація ·
-                Граб · Яблуня · Груша
+                Дуб · Граб · Береза · Вільха · Сосна · Осика
               </p>
             </div>
           </div>
