@@ -395,7 +395,6 @@ export default function Homepage() {
           <div className="hero-photo-frame"><img className="hero-photo" src="/hero-grandfather-v3.webp" alt="Дід Іван із колотими дровами" width={1536} height={1024} fetchPriority="high" /></div>
           <img className="pine-decor pine-top" src="/pine-ornament.webp" alt="" width={1536} height={1024} aria-hidden="true" />
           <div className="promo-copy">
-            <p className="hero-eyebrow">Натуральні дрова<br />з доставкою</p>
             <h1>
               Колоті дрова з доставкою по Києву та Київській області
             </h1>
