@@ -156,7 +156,7 @@ export default function Homepage() {
             const nextWood = WOODS.find((item) => item.id === wood);
             if (!nextWood || !quantities.includes(Number(nextQuantity))) {
               throw new Error(
-                'Оберіть породу та обсяг 2, 3, 5, 7, 10, 12, 15, 20 або 25 складометрів',
+                'Оберіть породу та обсяг 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 або 15 складометрів',
               );
             }
             const count = Number(nextQuantity);
@@ -450,13 +450,21 @@ export default function Homepage() {
                   <h3 className="font-heading text-3xl font-black uppercase">
                     {productTitles[wood.id]}
                   </h3>
-                  <p className="mt-4 text-lg font-black text-[#9b3724]">
-                    <span className="product-price-number">{new Set(Object.values(wood.prices)).size > 1 ? 'Від ' : ''}{formatPrice(getUnitPrice(wood, 15))}</span> <span className="product-price-unit">грн / скл. м</span>{' '}
-                    {new Set(Object.values(wood.prices)).size > 1 && (
-                      <span className="block text-sm font-semibold text-[#776b59]">при замовленні від 15 складометрів</span>
+                  <div className="product-price-display">
+                    {wood.previousCardPrice && wood.previousCardPrice > getUnitPrice(wood, 15) && (
+                      <p className="product-price-before">
+                        <span className="sr-only">Попередня ціна: </span>
+                        <del>{formatPrice(wood.previousCardPrice)}</del>
+                        <span className="product-price-before-unit"> грн / скл. м</span>
+                      </p>
                     )}
-                  </p>
-                  <p className="mt-2 text-sm font-semibold text-[#5f625b]">Доставка включена · від 2 до 25 скл. м</p>
+                    <p className="product-price-current">
+                      <span className="sr-only">Нова ціна: </span>
+                      <span className="product-price-number">{formatPrice(getUnitPrice(wood, 15))}</span>
+                      <span className="product-price-unit">грн / скл. м</span>
+                    </p>
+                  </div>
+                  <p className="mt-2 text-sm font-semibold text-[#5f625b]">Доставка включена · від 2 до 15 складометрів</p>
                   <div className="product-actions mt-auto flex flex-col gap-3 pt-7">
                     <details id={`prices-${wood.id}`} className="product-prices">
                       <summary aria-label={`Ціни для всіх об’ємів — ${wood.name}`}>

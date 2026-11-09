@@ -554,3 +554,12 @@ section[aria-labelledby] h2 { font-weight: 600; letter-spacing: -.025em; }
 /* Keep the corner ornament clear of the headline after removing the eyebrow. */
 .promo-hero .pine-top { left: -125px; }
 @media (max-width: 767px) { .promo-hero .pine-top { left: -72px; } }
+
+/* Catalogue price comparison: previous advertised rate and current fixed rate. */
+.product-price-display { margin-top: 18px; }
+.product-price-before { color: #756e63; font-size: 25px; font-weight: 700; line-height: 1.2; }
+.product-price-before del { text-decoration-thickness: 2px; }
+.product-price-before-unit { font-size: 12px; font-weight: 500; white-space: nowrap; }
+.product-price-current { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin-top: 5px; color: #c72d21; font-weight: 900; line-height: 1.1; }
+.product-price-current .product-price-number { font-weight: 900; font-size: clamp(40px, 3.2vw, 48px); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.product-price-current .product-price-unit { font-size: 14px; font-weight: 700; white-space: nowrap; }

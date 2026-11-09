@@ -16,6 +16,7 @@ export type WoodProduct = {
   description: string;
   bestFor: string;
   ordinaryPrice: number;
+  previousCardPrice?: number;
   prices: Record<number, number>;
   image: string;
   imagePosition: string;
@@ -175,6 +176,8 @@ export const WOODS: WoodProduct[] = woodOrder.map((id) => {
   const fixedPrice = FIXED_UNIT_PRICES[id];
   return {
     ...wood,
+    // Previously advertised card rate (15 stacked m³, BASE +100).
+    previousCardPrice: wood.prices[15] + SITE_MARKUP,
     ordinaryPrice: fixedPrice ?? wood.ordinaryPrice + SITE_MARKUP,
     prices: {
       2: fixedPrice ?? wood.prices[3] + SITE_MARKUP,
@@ -185,7 +188,7 @@ export const WOODS: WoodProduct[] = woodOrder.map((id) => {
   };
 });
 
-export const PRICE_QUANTITIES = [2, 3, 5, 7, 10, 12, 15, 20, 25] as const;
+export const PRICE_QUANTITIES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15] as const;
 
 export const PRICE_ROWS = PRICE_QUANTITIES.map((quantity) => ({
   label: `${quantity} скл. м`,
