@@ -403,7 +403,7 @@ body { font-size: 17px; }
 #benefits > div > div { padding-block: 20px; }
 #benefits svg { color: #9c561c; }
 #products h2 { font-size: clamp(2rem, 3.6vw, 3.8rem); text-transform: none; font-weight: 600; letter-spacing: -.035em; }
-#products article { border: 1px solid #e2cfac; border-radius: 12px; box-shadow: none; background: #fffcf5; }
+#products article { align-self: start; border: 1px solid #e2cfac; border-radius: 12px; box-shadow: none; background: #fffcf5; }
 #products h3 { font-size: clamp(1.3rem, 1.8vw, 1.65rem); line-height: 1.25; font-weight: 600; text-transform: none; letter-spacing: -.025em; }
 #products article button { background: #b7691c; border-radius: 10px; font-weight: 600; }
 #products article button:hover { background: #965016; }
